@@ -1,0 +1,125 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 269 87% 70%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 275 49% 95%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 275 66% 85%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 269 87% 70%;
+
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-poppins;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-montserrat;
+  }
+}
+
+.gradient-border {
+  @apply relative rounded-xl p-[1px] overflow-hidden;
+  background: linear-gradient(to right, #c084fc, #a78bfa, #818cf8);
+}
+
+.gradient-border-content {
+  @apply bg-white rounded-xl;
+}
+
+.section-padding {
+  @apply py-16 md:py-24;
+}
+
+@layer components {
+  .nav-link {
+    @apply relative font-medium text-gray-700 hover:text-primary transition-colors duration-300 after:absolute after:h-[2px] after:w-0 after:bottom-[-4px] after:left-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  .nav-link.active {
+    @apply text-primary after:w-full;
+  }
+
+  .button-primary {
+    @apply px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/80 transition-colors duration-300 font-medium;
+  }
+
+  .button-outline {
+    @apply px-6 py-3 border-2 border-primary text-primary rounded-lg hover:bg-primary/10 transition-colors duration-300 font-medium;
+  }
+
+  .skill-card {
+    @apply p-4 bg-secondary/50 rounded-lg flex flex-col items-center justify-center gap-2 hover:bg-secondary transition-colors duration-300;
+  }
+
+  .project-card {
+    @apply rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300;
+  }
+}
+
+.animated-bg {
+  background: linear-gradient(45deg, #f8fafc, #f1f5f9, #f8fafc);
+  background-size: 200% 200%;
+  animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-border {
+  @apply relative;
+}
+
+.animated-border::before {
+  content: '';
+  @apply absolute top-0 left-0 w-full h-full rounded-xl -z-10;
+  background: linear-gradient(45deg, #c084fc, #a78bfa, #818cf8);
+  background-size: 200% 200%;
+  animation: gradientBG 3s ease infinite;
+  filter: blur(8px);
+  opacity: 0.7;
+}

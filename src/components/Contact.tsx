@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -20,17 +21,30 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // This would be where you'd handle the form submission
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! This form is a demo and doesn\'t actually send emails yet.');
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
+
+    emailjs.send(
+      'service_80ejeq9',
+      'template_bdhyeao',
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      },
+      'e3lkKx0WyrYMtH0TV'
+    ).then(
+      (response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        alert('Thank you for your message! I will get back to you soon.');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      },
+      (err) => {
+        console.error('FAILED...', err);
+        alert('Oops! Something went wrong. Please try again.');
+      }
+    );
   };
+
 
   return (
     <section id="contact" className="section-padding bg-white">
@@ -48,7 +62,7 @@ const Contact = () => {
             <div className="md:col-span-2">
               <div className="bg-gray-50 p-6 rounded-lg h-full">
                 <h3 className="text-xl font-semibold mb-6 text-gray-800">Contact Information</h3>
-                
+
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
                     <div className="bg-primary/10 p-3 rounded-full">
@@ -59,17 +73,17 @@ const Contact = () => {
                       <p className="text-gray-600">+91 99787 76575</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-4">
                     <div className="bg-primary/10 p-3 rounded-full">
                       <Mail size={20} className="text-primary" />
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-700">Email</h4>
-                      <p className="text-gray-600">work.bhargavip@yahoo.com</p>
+                      <p className="text-gray-600">work.bhargavi@yahoo.com</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-4">
                     <div className="bg-primary/10 p-3 rounded-full">
                       <MapPin size={20} className="text-primary" />
@@ -82,11 +96,11 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="md:col-span-3">
               <form onSubmit={handleSubmit} className="bg-gray-50 p-6 rounded-lg">
                 <h3 className="text-xl font-semibold mb-6 text-gray-800">Send Me a Message</h3>
-                
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label htmlFor="name" className="block text-gray-700 mb-2">Your Name</label>
@@ -113,7 +127,7 @@ const Contact = () => {
                     />
                   </div>
                 </div>
-                
+
                 <div className="mb-4">
                   <label htmlFor="subject" className="block text-gray-700 mb-2">Subject</label>
                   <input
@@ -126,7 +140,7 @@ const Contact = () => {
                     required
                   />
                 </div>
-                
+
                 <div className="mb-6">
                   <label htmlFor="message" className="block text-gray-700 mb-2">Your Message</label>
                   <textarea
@@ -139,7 +153,7 @@ const Contact = () => {
                     required
                   ></textarea>
                 </div>
-                
+
                 <button type="submit" className="button-primary flex items-center gap-2">
                   <Send size={18} />
                   <span>Send Message</span>

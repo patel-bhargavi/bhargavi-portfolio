@@ -18,14 +18,10 @@ const About = () => {
             Committed to continuous learning, attention to detail, and delivering high-quality solutions. Comfortable collaborating in fast-paced environments to meet both user and business needs.
           </p>
           <div className="flex justify-center mt-8">
-            <a 
-              href="#" 
+            <a
+              href="/assets/resume.pdf"
               className="button-primary inline-flex items-center gap-2"
-              onClick={(e) => {
-                e.preventDefault();
-                // Add your resume download link here
-                alert("Resume download functionality will be added later");
-              }}
+              download="Bhargavi_Patel_Resume.pdf"
             >
               Download Resume
             </a>

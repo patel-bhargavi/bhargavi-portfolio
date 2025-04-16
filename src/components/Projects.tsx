@@ -8,17 +8,30 @@ const Projects = () => {
       description: "Developed and implemented key UI screens based on Figma designs using React TypeScript, Tailwind CSS, and shadcn/ui, ensuring a clean and responsive interface. Integrated backend services using Redux Toolkit and React Query to handle API calls efficiently and manage state and caching.",
       image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=2070&auto=format&fit=crop",
       technologies: ["React", "TypeScript", "Tailwind CSS", "Redux Toolkit", "TanStack Query"],
-      github: "#",
-      live: "#"
     },
     {
       title: "Catloga - Digital Tile Catalogue Platform",
       description: "Developed a responsive and user-centric interface for a digital catalog system showcasing tile manufacturing designs. Translated Figma designs into high-quality UI components using React TypeScript, Tailwind CSS, and shadcn/ui. Implemented seamless API integrations using Redux Toolkit and React Query to ensure efficient state management and optimized data fetching.",
       image: "https://images.unsplash.com/photo-1536566482680-fca31930a0bd?q=80&w=2787&auto=format&fit=crop",
       technologies: ["React", "TypeScript", "Tailwind CSS", "Redux Toolkit", "TanStack Query"],
-      github: "#",
-      live: "#"
+    },
+    {
+      title: "Ecomzy Shop",
+      description: "Created a clean and responsive e-commerce user interface for a basic online shopping experience. Designed the layout for product listings, product detail views, and add-to-cart functionality using React, TypeScript, and Tailwind CSS. This project focuses on front-end UI/UX without backend integration, ideal for demonstrating foundational e-commerce UI concepts.",
+      image: "https://images.unsplash.com/photo-1536566482680-fca31930a0bd?q=80&w=2787&auto=format&fit=crop",
+      technologies: ["React", "TypeScript", "Tailwind CSS"],
+      github: "https://github.com/patel-bhargavi/ecomzy-shop",
+      live: "https://patel-bhargavi.github.io/ecomzy-shop/"
+    },
+    {
+      title: "GIF Generator",
+      description: "Built a dynamic and fun web interface that generates random GIFs using the Giphy API. The application automatically fetches and displays a new GIF on each load or button click. Developed using React and TypeScript, with a focus on clean state management and API integration, styled using Tailwind CSS.",
+      image: "https://images.unsplash.com/photo-1536566482680-fca31930a0bd?q=80&w=2787&auto=format&fit=crop",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Giphy API"],
+      github: "https://github.com/patel-bhargavi/gif-generator",
+      live: "https://patel-bhargavi.github.io/gif-generator/"
     }
+
   ];
 
   return (
@@ -34,18 +47,18 @@ const Projects = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {projects.map((project, index) => (
-            <div 
-              key={index} 
-              className="project-card bg-white overflow-hidden"
+            <div
+              key={index}
+              className="project-card bg-white overflow-hidden rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300"
               style={{ animationDelay: `${0.3 * index}s` }}
             >
-              <div className="h-56 overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
+              {/* <div className="h-56 overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
-              </div>
+              </div> */}
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-3 text-gray-800">{project.title}</h3>
                 <p className="text-gray-600 mb-4 text-sm">
@@ -58,26 +71,28 @@ const Projects = () => {
                     </span>
                   ))}
                 </div>
-                <div className="flex gap-3">
-                  <a 
-                    href={project.github} 
-                    className="flex items-center gap-1 text-gray-700 hover:text-primary transition-colors"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Github size={18} />
-                    <span>Code</span>
-                  </a>
-                  <a 
-                    href={project.live} 
-                    className="flex items-center gap-1 text-gray-700 hover:text-primary transition-colors"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <ExternalLink size={18} />
-                    <span>Live Demo</span>
-                  </a>
-                </div>
+                {project.github &&
+                  <div className="flex gap-3">
+                    <a
+                      href={project.github}
+                      className="flex items-center gap-1 text-gray-700 hover:text-primary transition-colors"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Github size={18} />
+                      <span>Code</span>
+                    </a>
+                    <a
+                      href={project.live}
+                      className="flex items-center gap-1 text-gray-700 hover:text-primary transition-colors"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <ExternalLink size={18} />
+                      <span>Live Demo</span>
+                    </a>
+                  </div>
+                }
               </div>
             </div>
           ))}

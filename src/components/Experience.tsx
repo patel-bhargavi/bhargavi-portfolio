@@ -41,9 +41,6 @@ const Experience = () => {
         <div className="max-w-4xl mx-auto">
           {experiences.map((experience, index) => (
             <div key={index} className="mb-12 relative">
-              {index !== experiences.length - 1 && (
-                <div className="absolute left-6 top-8 bottom-0 w-[2px] bg-gray-200"></div>
-              )}
               <div className="flex flex-col sm:flex-row gap-6">
                 <div className="sm:w-1/3">
                   <div className="p-4 bg-secondary rounded-lg shadow-sm">

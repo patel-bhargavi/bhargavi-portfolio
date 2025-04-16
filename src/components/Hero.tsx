@@ -1,6 +1,6 @@
 
 import { ArrowDown } from 'lucide-react';
-
+import image from '../assets/home-main.svg'
 const Hero = () => {
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('about');
@@ -25,8 +25,8 @@ const Hero = () => {
               A dedicated and highly motivated Frontend Developer with a strong focus on creating engaging and user-friendly web applications. Skilled in building interactive interfaces that deliver seamless user experiences.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a 
-                href="#contact" 
+              <a
+                href="#contact"
                 className="button-primary"
                 onClick={(e) => {
                   e.preventDefault();
@@ -38,8 +38,8 @@ const Hero = () => {
               >
                 Get In Touch
               </a>
-              <a 
-                href="#projects" 
+              <a
+                href="#projects"
                 className="button-outline"
                 onClick={(e) => {
                   e.preventDefault();
@@ -56,7 +56,7 @@ const Hero = () => {
           <div className="md:col-span-5 flex justify-center md:justify-end animate-fade-in" style={{ animationDelay: '0.6s' }}>
             <div className="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full overflow-hidden animated-border">
               <img
-                src="/lovable-uploads/7ae95d27-39ae-49a2-9522-86a86fed4c1c.png"
+                src={image}
                 alt="Bhargavi Patel Resume"
                 className="w-full h-full object-cover"
               />

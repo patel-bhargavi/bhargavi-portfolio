@@ -16,7 +16,7 @@ const Footer = () => {
 
           <div className="flex gap-4 mb-8">
             <a
-              href="https://www.linkedin.com/"
+              href="https://www.linkedin.com/in/bhargavi-patel-1016b9238"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gray-700 p-3 rounded-full text-white hover:bg-primary transition-colors duration-300"
@@ -24,7 +24,7 @@ const Footer = () => {
               <Linkedin size={20} />
             </a>
             <a
-              href="https://github.com/"
+              href="https://github.com/patel-bhargavi/"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gray-700 p-3 rounded-full text-white hover:bg-primary transition-colors duration-300"

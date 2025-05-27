@@ -19,7 +19,7 @@ const About = () => {
           </p>
           <div className="flex justify-center mt-8">
             <a
-              href="/assets/resume.pdf"
+              href="/assets/Bhargavi Patel Resume.pdf"
               className="button-primary inline-flex items-center gap-2"
               download="Bhargavi_Patel_Resume.pdf"
             >

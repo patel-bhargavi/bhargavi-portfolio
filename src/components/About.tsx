@@ -1,3 +1,4 @@
+import pdf from '../assets/Bhargavi Patel Resume.pdf';
 
 const About = () => {
   return (
@@ -19,7 +20,7 @@ const About = () => {
           </p>
           <div className="flex justify-center mt-8">
             <a
-              href="/assets/Bhargavi Patel Resume.pdf"
+              href={pdf} // Ensure this file is in your public folder
               className="button-primary inline-flex items-center gap-2"
               download="Bhargavi_Patel_Resume.pdf"
             >

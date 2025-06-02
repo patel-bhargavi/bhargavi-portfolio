@@ -1,67 +1,103 @@
 
-import { Calendar, MapPin } from 'lucide-react';
+import React, { useRef, useEffect } from 'react';
+import { Calendar, MapPin, Building } from 'lucide-react';
 
 const Experience = () => {
+  const experienceRef = useRef<HTMLDivElement>(null);
+
   const experiences = [
     {
-      company: "Slang Media",
-      location: "Morbi, Gujarat",
-      position: "Junior Frontend Developer",
-      period: "September 2024 - April 2025",
-      description: [
-        "Developed and optimized dynamic, scalable web applications using React.js and Next.js, focusing on performance and user experience.",
-        "Implemented and integrated RESTful APIs to ensure smooth backend communication and leveraged Redux Toolkit and React Query (TanStack Query) for efficient state and data management.",
-        "Crafted responsive, visually appealing UIs using Tailwind CSS and Bootstrap, adhering to modern design principles.",
-        "Collaborated with cross-functional teams and utilized Node.js for minor backend tasks, contributing to a more cohesive development workflow."
-      ]
+      title: "Full Stack Developer",
+      company: "Sang Media Pvt.Ltd - Morbi (Gujarat)",
+      period: "July 2024 - September 2024",
+      type: "INTERN FRONT END DEVELOPER",
+      description: "Developed a comprehensive web application using React framework, integrating dynamic user interface with backend services. Collaborated with backend teams to integrate RESTful APIs, ensuring smooth data flow and application functionality. Built a clean and responsive frontend design using modern CSS frameworks and Best Query for optimized data handling. Created registration, authentication, and user management features utilizing cutting-edge technologies and methodologies.",
+      skills: ["React", "RESTful APIs", "CSS Frameworks", "Authentication", "User Management"]
     },
     {
-      company: "Slang Media",
-      location: "Morbi, Gujarat",
-      position: "Intern Frontend Developer",
+      title: "Full Stack Developer",
+      company: "Sang Media Pvt.Ltd - Morbi (Gujarat)",
       period: "July 2024 - September 2024",
-      description: [
-        "During my internship as a Frontend Developer, I gained practical experience building and maintaining responsive, high-performance web applications using React.js and Next.js.",
-        "Collaborated closely with backend teams to integrate RESTful APIs, ensuring seamless data flow and optimized user experiences.",
-        "My work involved managing application state effectively using Redux Toolkit and React Query (TanStack Query) for efficient data fetching and caching.",
-        "Contributed to designing intuitive UIs with Tailwind CSS and Bootstrap, maintaining consistency across devices and screen sizes.",
-        "Additionally, further enhanced my full-stack development understanding through exposure to Node.js for basic backend interactions."
-      ]
+      type: "INTERN FRONT END DEVELOPER",
+      description: "Enhanced Query Tactics Query for efficient data and data management. Created registration, authentication, and user management features utilizing cutting-edge technologies. Focused on performance optimization and user experience improvements. Contributed to team knowledge sharing and development best practices.",
+      skills: ["Data Management", "Performance Optimization", "Team Collaboration", "Best Practices"]
     }
   ];
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (experienceRef.current) {
+      observer.observe(experienceRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="experience" className="section-padding bg-white">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Work Experience</h2>
-          <div className="h-1 w-20 bg-primary mx-auto"></div>
+    <section id="experience" className="py-20 px-6 relative">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            Work Experience
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-8"></div>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Professional journey and key contributions in web development
+          </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          {experiences.map((experience, index) => (
-            <div key={index} className="mb-12 relative">
-              <div className="flex flex-col sm:flex-row gap-6">
-                <div className="sm:w-1/3">
-                  <div className="p-4 bg-secondary rounded-lg shadow-sm">
-                    <h3 className="font-semibold text-lg text-gray-800">{experience.company}</h3>
-                    <div className="flex items-center text-gray-600 mt-2">
-                      <MapPin size={16} className="text-primary mr-2" />
-                      <span className="text-sm">{experience.location}</span>
+        <div ref={experienceRef} className="relative">
+          {/* Timeline line */}
+          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500 hidden md:block"></div>
+
+          {experiences.map((exp, index) => (
+            <div
+              key={index}
+              className="relative mb-12 md:ml-16 group"
+              style={{ animationDelay: `${index * 200}ms` }}
+            >
+              {/* Timeline dot */}
+              <div className="absolute -left-20 top-6 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-4 border-gray-900 hidden md:block group-hover:scale-125 transition-transform duration-300"></div>
+
+              <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/10">
+                <div className="flex flex-wrap items-start justify-between mb-4">
+                  <div>
+                    <h3 className="text-2xl font-bold text-white mb-2">{exp.title}</h3>
+                    <div className="flex items-center text-blue-400 mb-2">
+                      <Building size={16} className="mr-2" />
+                      <span className="font-medium">{exp.company}</span>
                     </div>
-                    <div className="flex items-center text-gray-600 mt-2">
-                      <Calendar size={16} className="text-primary mr-2" />
-                      <span className="text-sm">{experience.period}</span>
+                    <div className="flex items-center text-gray-400 mb-2">
+                      <Calendar size={16} className="mr-2" />
+                      <span>{exp.period}</span>
+                    </div>
+                    <div className="inline-block bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30">
+                      {exp.type}
                     </div>
                   </div>
                 </div>
-                <div className="sm:w-2/3">
-                  <h4 className="font-semibold text-lg text-gray-800 mb-3">{experience.position}</h4>
-                  <ul className="list-disc pl-4 space-y-2">
-                    {experience.description.map((item, i) => (
-                      <li key={i} className="text-gray-600 text-base">{item}</li>
-                    ))}
-                  </ul>
+
+                <p className="text-gray-300 leading-relaxed mb-6">{exp.description}</p>
+
+                <div className="flex flex-wrap gap-2">
+                  {exp.skills.map((skill, skillIndex) => (
+                    <span
+                      key={skillIndex}
+                      className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm border border-blue-500/30 hover:bg-blue-500/30 transition-colors duration-300"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>

@@ -1,101 +1,114 @@
 
-import { ExternalLink, Github } from 'lucide-react';
+import React, { useRef, useEffect } from 'react';
+import { ExternalLink, Github, Code, Database, Palette } from 'lucide-react';
 
 const Projects = () => {
+  const projectsRef = useRef<HTMLDivElement>(null);
+
   const projects = [
     {
       title: "HRM & Task Management",
-      description: "Developed and implemented key UI screens based on Figma designs using React TypeScript, Tailwind CSS, and shadcn/ui, ensuring a clean and responsive interface. Integrated backend services using Redux Toolkit and React Query to handle API calls efficiently and manage state and caching.",
-      image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=2070&auto=format&fit=crop",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Redux Toolkit", "TanStack Query"],
+      description: "A comprehensive tracking app developed by designing key UI features based on Figma designs. Built a clean and responsive business theme using React, TypeScript, Tailwind CSS, and Bootstrap to create integrated forms with React Hook Form and validation. Implemented secure user authentication and utilized intelligent system design for optimal performance.",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "React Hook Form", "Authentication"],
+      icon: Database,
+      gradient: "from-blue-500 to-cyan-500"
     },
     {
-      title: "Catloga - Digital Tile Catalogue Platform",
-      description: "Developed a responsive and user-centric interface for a digital catalog system showcasing tile manufacturing designs. Translated Figma designs into high-quality UI components using React TypeScript, Tailwind CSS, and shadcn/ui. Implemented seamless API integrations using Redux Toolkit and React Query to ensure efficient state management and optimized data fetching.",
-      image: "https://images.unsplash.com/photo-1536566482680-fca31930a0bd?q=80&w=2787&auto=format&fit=crop",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Redux Toolkit", "TanStack Query"],
-    },
-    {
-      title: "Ecomzy Shop",
-      description: "Created a clean and responsive e-commerce user interface for a basic online shopping experience. Designed the layout for product listings, product detail views, and add-to-cart functionality using React, TypeScript, and Tailwind CSS. This project focuses on front-end UI/UX without backend integration, ideal for demonstrating foundational e-commerce UI concepts.",
-      image: "https://images.unsplash.com/photo-1536566482680-fca31930a0bd?q=80&w=2787&auto=format&fit=crop",
-      technologies: ["React", "TypeScript", "Tailwind CSS"],
-      github: "https://github.com/patel-bhargavi/ecomzy-shop",
-      live: "https://patel-bhargavi.github.io/ecomzy-shop/"
-    },
-    {
-      title: "GIF Generator",
-      description: "Built a dynamic and fun web interface that generates random GIFs using the Giphy API. The application automatically fetches and displays a new GIF on each load or button click. Developed using React and TypeScript, with a focus on clean state management and API integration, styled using Tailwind CSS.",
-      image: "https://images.unsplash.com/photo-1536566482680-fca31930a0bd?q=80&w=2787&auto=format&fit=crop",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Giphy API"],
-      github: "https://github.com/patel-bhargavi/gif-generator",
-      live: "https://patel-bhargavi.github.io/gif-generator/"
+      title: "College - Digital Trip Catalogue Platform",
+      description: "Developed a responsive frontend for a digital catalog platform tailored for the tourism industry using innovative design and features. Created intelligent route organization and visual appeal. Leveraged React Toolkit and React Query for optimized data fetching, seamless and client-side management for improved user experience.",
+      technologies: ["React", "React Query", "Redux Toolkit", "Responsive Design"],
+      icon: Palette,
+      gradient: "from-purple-500 to-pink-500"
     }
-
   ];
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (projectsRef.current) {
+      observer.observe(projectsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="projects" className="section-padding bg-gray-50">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">My Projects</h2>
-          <div className="h-1 w-20 bg-primary mx-auto"></div>
-          <p className="text-gray-600 mt-6 max-w-2xl mx-auto">
-            Here are some of the projects I've worked on. These showcase my skills and experience in frontend development.
+    <section id="projects" className="py-20 px-6 bg-gray-900/50">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            Featured Projects
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-8"></div>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Showcase of my recent work and development projects
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div ref={projectsRef} className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="project-card bg-white overflow-hidden rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300"
-              style={{ animationDelay: `${0.3 * index}s` }}
+              className="group relative bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-gray-600 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-gray-900/50"
+              style={{ animationDelay: `${index * 200}ms` }}
             >
-              {/* <div className="h-56 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-              </div> */}
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-3 text-gray-800">{project.title}</h3>
-                <p className="text-gray-600 mb-4 text-sm">
+              {/* Gradient overlay */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+              
+              <div className="relative p-8">
+                <div className="flex items-start justify-between mb-6">
+                  <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <project.icon size={32} className="text-white" />
+                  </div>
+                  <div className="flex space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-300">
+                      <Github size={20} />
+                    </button>
+                    <button className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-300">
+                      <ExternalLink size={20} />
+                    </button>
+                  </div>
+                </div>
+
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-500 group-hover:bg-clip-text transition-all duration-300">
+                  {project.title}
+                </h3>
+
+                <p className="text-gray-300 leading-relaxed mb-6 group-hover:text-gray-200 transition-colors duration-300">
                   {project.description}
                 </p>
-                <div className="mb-4 flex flex-wrap gap-2">
-                  {project.technologies.map((tech, i) => (
-                    <span key={i} className="px-3 py-1 bg-secondary text-gray-700 rounded-full text-xs">
+
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech, techIndex) => (
+                    <span
+                      key={techIndex}
+                      className="px-3 py-1 bg-gray-700/50 text-gray-300 rounded-full text-sm border border-gray-600 group-hover:border-gray-500 group-hover:bg-gray-600/50 transition-all duration-300"
+                    >
                       {tech}
                     </span>
                   ))}
                 </div>
-                {project.github &&
-                  <div className="flex gap-3">
-                    <a
-                      href={project.github}
-                      className="flex items-center gap-1 text-gray-700 hover:text-primary transition-colors"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <Github size={18} />
-                      <span>Code</span>
-                    </a>
-                    <a
-                      href={project.live}
-                      className="flex items-center gap-1 text-gray-700 hover:text-primary transition-colors"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <ExternalLink size={18} />
-                      <span>Live Demo</span>
-                    </a>
-                  </div>
-                }
+
+                {/* Animated border */}
+                <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-500 transition-all duration-500"></div>
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <button className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/25">
+            View All Projects
+          </button>
         </div>
       </div>
     </section>

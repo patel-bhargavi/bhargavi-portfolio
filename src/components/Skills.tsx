@@ -1,70 +1,83 @@
 
-import { Code, Database, Layout, PenTool, Share2, Zap } from 'lucide-react';
+import React, { useRef, useEffect, useState } from 'react';
 
 const Skills = () => {
-  const frontendSkills = [
-    { name: "React.js", icon: <Code size={24} /> },
-    { name: "Next.js", icon: <Zap size={24} /> },
-    { name: "TypeScript", icon: <Code size={24} /> },
-    { name: "JavaScript", icon: <Code size={24} /> },
-    { name: "Tailwind CSS", icon: <PenTool size={24} /> },
-    { name: "Redux Toolkit", icon: <Database size={24} /> },
-    { name: "TanStack Query", icon: <Share2 size={24} /> },
-    { name: "HTML/CSS", icon: <Layout size={24} /> },
+  const skillsRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const skills = [
+    { name: 'React.js', level: 90, color: 'from-blue-500 to-cyan-500' },
+    { name: 'JavaScript', level: 85, color: 'from-yellow-500 to-orange-500' },
+    { name: 'TypeScript', level: 80, color: 'from-blue-600 to-blue-400' },
+    { name: 'HTML/CSS', level: 95, color: 'from-orange-500 to-red-500' },
+    { name: 'Node.js', level: 75, color: 'from-green-500 to-emerald-500' },
+    { name: 'Python', level: 70, color: 'from-green-600 to-blue-600' },
+    { name: 'MySQL', level: 80, color: 'from-orange-600 to-yellow-500' },
+    { name: 'PostgreSQL', level: 75, color: 'from-blue-700 to-blue-500' },
+    { name: 'Redux', level: 85, color: 'from-purple-600 to-purple-400' }
   ];
 
-  const otherSkills = [
-    { name: "Node.js", icon: <Code size={24} /> },
-    { name: "RESTful APIs", icon: <Share2 size={24} /> },
-    { name: "Bootstrap", icon: <PenTool size={24} /> },
-    { name: "Firebase", icon: <Database size={24} /> },
-    { name: "MySQL", icon: <Database size={24} /> },
-    { name: "WordPress", icon: <Layout size={24} /> },
-    { name: "Flutter", icon: <Layout size={24} /> },
-    { name: "TypeScript", icon: <Code size={24} /> },
-  ];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (skillsRef.current) {
+      observer.observe(skillsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section id="skills" className="section-padding bg-gray-50">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">My Skills</h2>
-          <div className="h-1 w-20 bg-primary mx-auto"></div>
-          <p className="text-gray-600 mt-6 max-w-2xl mx-auto">
-            I've acquired and honed various technical skills throughout my frontend development journey.
+    <section id="skills" className="py-20 px-6 bg-gray-900/50">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            Skills & Expertise
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-8"></div>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            A comprehensive set of technical skills acquired through hands-on experience and continuous learning
           </p>
         </div>
 
-        <div className="mb-12">
-          <h3 className="text-xl font-semibold mb-6 text-center">Frontend Development</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {frontendSkills.map((skill, index) => (
-              <div 
-                key={index} 
-                className="skill-card"
-                style={{ animationDelay: `${0.1 * index}s` }}
-              >
-                <div className="text-primary mb-2">{skill.icon}</div>
-                <h4 className="font-medium text-gray-800">{skill.name}</h4>
+        <div ref={skillsRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {skills.map((skill, index) => (
+            <div
+              key={skill.name}
+              className="p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl hover:shadow-gray-900/50"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold text-white">{skill.name}</h3>
+                <span className="text-gray-400 text-sm">{skill.level}%</span>
               </div>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h3 className="text-xl font-semibold mb-6 text-center">Additional Skills</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {otherSkills.map((skill, index) => (
-              <div 
-                key={index} 
-                className="skill-card"
-                style={{ animationDelay: `${0.1 * index}s` }}
-              >
-                <div className="text-primary mb-2">{skill.icon}</div>
-                <h4 className="font-medium text-gray-800">{skill.name}</h4>
+              
+              <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                <div
+                  className={`h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-1000 ease-out relative`}
+                  style={{
+                    width: isVisible ? `${skill.level}%` : '0%',
+                    transitionDelay: `${index * 100}ms`
+                  }}
+                >
+                  <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+                </div>
               </div>
-            ))}
-          </div>
+              
+              <div className="mt-4 flex justify-center">
+                <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${skill.color} animate-pulse`}></div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

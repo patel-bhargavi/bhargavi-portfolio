@@ -1,68 +1,73 @@
-Here's a sample README text for your portfolio project:
+# Welcome to your Lovable project
 
----
+## Project info
 
-# Bhargavi's Portfolio
+**URL**: https://lovable.dev/projects/d77b30af-716c-4834-80da-b1f5d2707407
 
-## Project Overview
+## How can I edit this code?
 
-Welcome to my portfolio! This project showcases my work, skills, and achievements. It's built with modern technologies like React, TypeScript, Vite, and Tailwind CSS, ensuring a fast, responsive, and user-friendly experience.
+There are several ways of editing your application.
 
-**Portfolio URL**: [Bhargavi's Portfolio](https://bhargavi-portfolio-1uifvo8uw-bhargavis-projects.vercel.app/)
+**Use Lovable**
 
-## Features
+Simply visit the [Lovable Project](https://lovable.dev/projects/d77b30af-716c-4834-80da-b1f5d2707407) and start prompting.
 
-- **Modern UI**: A clean, minimal design with a focus on showcasing my projects and experience.
-- **Responsive Design**: Optimized for desktops, tablets, and mobile devices.
-- **Interactive Projects**: Click on the projects to learn more about each one, including live demos and source code.
+Changes made via Lovable will be committed automatically to this repo.
 
-## Technologies Used
+**Use your preferred IDE**
 
-This portfolio is built using the following technologies:
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-- **Vite**: A fast build tool for modern web development.
-- **TypeScript**: A statically typed superset of JavaScript.
-- **React**: A JavaScript library for building user interfaces.
-- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
-- **shadcn-ui**: A component library to build UI elements efficiently.
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-## Installation & Setup
+Follow these steps:
 
-To run this project locally:
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
 
-1. **Clone the repository:**
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
 
-   ```bash
-   git clone <YOUR_REPOSITORY_URL>
-   ```
+# Step 3: Install the necessary dependencies.
+npm i
 
-2. **Navigate into the project directory:**
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
+```
 
-   ```bash
-   cd <YOUR_PROJECT_NAME>
-   ```
+**Edit a file directly in GitHub**
 
-3. **Install dependencies:**
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-   ```bash
-   npm install
-   ```
+**Use GitHub Codespaces**
 
-4. **Run the development server:**
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-   ```bash
-   npm run dev
-   ```
+## What technologies are used for this project?
 
-5. Visit `http://localhost:3000` in your browser to see the portfolio in action.
+This project is built with:
 
-## How to Contribute
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-Feel free to fork this project and make contributions. If you find any issues or would like to suggest improvements, open a pull request, and I'll review it.
+## How can I deploy this project?
 
-## License
+Simply open [Lovable](https://lovable.dev/projects/d77b30af-716c-4834-80da-b1f5d2707407) and click on Share -> Publish.
 
-This project is open-source and available under the MIT License.
+## Can I connect a custom domain to my Lovable project?
 
----
+Yes, you can!
 
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)

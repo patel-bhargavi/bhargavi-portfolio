@@ -14,11 +14,11 @@ const Projects = () => {
       gradient: "from-blue-500 to-cyan-500"
     },
     {
-      title: "College - Digital Trip Catalogue Platform",
-      description: "Developed a responsive frontend for a digital catalog platform tailored for the tourism industry using innovative design and features. Created intelligent route organization and visual appeal. Leveraged React Toolkit and React Query for optimized data fetching, seamless and client-side management for improved user experience.",
-      technologies: ["React", "React Query", "Redux Toolkit", "Responsive Design"],
-      icon: Palette,
-      gradient: "from-purple-500 to-pink-500"
+      title: "Catloga – Digital Tile Catalogue Maker",
+      description: "Developed a digital tile catalogue platform that enables businesses to easily create, manage, and showcase their tile collections online. Designed an intuitive and visually appealing user interface using React and Tailwind CSS, allowing users to upload product images, organize tiles by categories, and generate interactive digital catalogues. Integrated secure authentication and efficient data management for seamless user experience. This project streamlined the process of presenting and sharing tile collections with clients, enhancing business visibility and customer engagement.",
+      technologies: ["React", "Tailwind CSS", "Authentication", "UI/UX Design", "React Query"],
+      icon: Database,
+      gradient: "from-green-500 to-emerald-500"
     }
   ];
 
@@ -63,7 +63,7 @@ const Projects = () => {
             >
               {/* Gradient overlay */}
               <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-              
+
               <div className="relative p-8">
                 <div className="flex items-start justify-between mb-6">
                   <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
@@ -104,11 +104,15 @@ const Projects = () => {
             </div>
           ))}
         </div>
-
         <div className="text-center mt-12">
-          <button className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/25">
+          <a
+            href="https://github.com/patel-bhargavi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/25"
+          >
             View All Projects
-          </button>
+          </a>
         </div>
       </div>
     </section>

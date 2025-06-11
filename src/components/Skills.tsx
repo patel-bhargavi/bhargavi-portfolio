@@ -8,12 +8,11 @@ const Skills = () => {
   const skills = [
     { name: 'React.js', level: 90, color: 'from-blue-500 to-cyan-500' },
     { name: 'JavaScript', level: 85, color: 'from-yellow-500 to-orange-500' },
-    { name: 'TypeScript', level: 80, color: 'from-blue-600 to-blue-400' },
+    { name: 'TypeScript', level: 85, color: 'from-blue-600 to-blue-400' },
     { name: 'HTML/CSS', level: 95, color: 'from-orange-500 to-red-500' },
-    { name: 'Node.js', level: 75, color: 'from-green-500 to-emerald-500' },
-    { name: 'Python', level: 70, color: 'from-green-600 to-blue-600' },
+    { name: 'Node.js', level: 45, color: 'from-green-500 to-emerald-500' },
     { name: 'MySQL', level: 80, color: 'from-orange-600 to-yellow-500' },
-    { name: 'PostgreSQL', level: 75, color: 'from-blue-700 to-blue-500' },
+    { name: 'PostgreSQL', level: 40, color: 'from-blue-700 to-blue-500' },
     { name: 'Redux', level: 85, color: 'from-purple-600 to-purple-400' }
   ];
 
@@ -60,7 +59,7 @@ const Skills = () => {
                 <h3 className="text-lg font-semibold text-white">{skill.name}</h3>
                 <span className="text-gray-400 text-sm">{skill.level}%</span>
               </div>
-              
+
               <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
                 <div
                   className={`h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-1000 ease-out relative`}
@@ -72,7 +71,7 @@ const Skills = () => {
                   <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
                 </div>
               </div>
-              
+
               <div className="mt-4 flex justify-center">
                 <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${skill.color} animate-pulse`}></div>
               </div>

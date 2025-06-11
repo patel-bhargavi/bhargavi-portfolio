@@ -7,21 +7,32 @@ const Experience = () => {
 
   const experiences = [
     {
-      title: "Full Stack Developer",
-      company: "Sang Media Pvt.Ltd - Morbi (Gujarat)",
-      period: "July 2024 - September 2024",
+      title: "Junior Front-end Developer",
+      company: "Sang Media - Morbi (Gujarat)",
+      period: "September 2024 - April 2025",
       type: "INTERN FRONT END DEVELOPER",
-      description: "Developed a comprehensive web application using React framework, integrating dynamic user interface with backend services. Collaborated with backend teams to integrate RESTful APIs, ensuring smooth data flow and application functionality. Built a clean and responsive frontend design using modern CSS frameworks and Best Query for optimized data handling. Created registration, authentication, and user management features utilizing cutting-edge technologies and methodologies.",
-      skills: ["React", "RESTful APIs", "CSS Frameworks", "Authentication", "User Management"]
+      description:
+        "As a Frontend Developer, I developed and optimized dynamic, scalable web applications using React.js and Next.js, focusing on performance and user experience. I implemented and integrated RESTful APIs to ensure smooth backend communication and leveraged Redux Toolkit and React Query (TanStack Query) for efficient state and data management. I crafted responsive, visually consistent UIs using Tailwind CSS and Bootstrap, adhering to modern design principles. Additionally, I collaborated with cross-functional teams and utilized Node.js for minor backend tasks, contributing to a more cohesive development workflow.",
+      skills: ["React", "Next.js", "Redux Toolkit", "React Query", "RESTful APIs", "Tailwind CSS", "Bootstrap", "Node.js", "Team Collaboration"]
     },
     {
-      title: "Full Stack Developer",
-      company: "Sang Media Pvt.Ltd - Morbi (Gujarat)",
+      title: "Intern Front-end Developer",
+      company: "Sang Media - Morbi (Gujarat)",
       period: "July 2024 - September 2024",
       type: "INTERN FRONT END DEVELOPER",
-      description: "Enhanced Query Tactics Query for efficient data and data management. Created registration, authentication, and user management features utilizing cutting-edge technologies. Focused on performance optimization and user experience improvements. Contributed to team knowledge sharing and development best practices.",
-      skills: ["Data Management", "Performance Optimization", "Team Collaboration", "Best Practices"]
-    }
+      description:
+        "Built and maintained responsive, high-performance web applications using React.js during my internship as a Front-end Developer. Collaborated with backend teams to integrate RESTful APIs, ensuring smooth data flow and optimal user experiences. Utilized Redux Toolkit and React Query for efficient state management and data caching. Designed consistent, device-friendly UIs using Tailwind CSS and Bootstrap. Actively participated in code reviews and team stand-ups, contributing to agile development cycles. Focused on writing clean, reusable code and followed best practices to enhance code maintainability and scalability.",
+      skills: [
+        "Redux Toolkit",
+        "React Query",
+        "Tailwind CSS",
+        "Bootstrap",
+        "Code Reviews",
+        "Agile Development",
+        "Clean Code",
+        "Best Practices",
+      ],
+    },
   ];
 
   useEffect(() => {

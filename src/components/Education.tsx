@@ -7,39 +7,37 @@ const Education = () => {
 
   const education = [
     {
-      degree: "BCA",
-      institution: "BSC-SBI Busal",
-      location: "Mumbai",
-      period: "2019 - 2022",
+      degree: "B.E (Information Technology)",
+      institution: "L.E. College",
+      location: "Morbi.Gujarat",
+      period: "2022 - 2025",
       type: "Bachelor's Degree",
       icon: GraduationCap,
       color: "from-blue-500 to-cyan-500"
     },
     {
-      degree: "PGCA",
-      institution: "Silver Knowledge Engineering",
+      degree: "Diploma - C.E(Computer Engineering)",
+      institution: "SREZ College",
       location: "Rajkot",
       period: "2019 - 2022",
-      type: "Post Graduate",
+      type: "Diploma",
       icon: Award,
       color: "from-purple-500 to-pink-500"
     },
     {
-      degree: "Programming Technology",
-      institution: "Silver Knowledge Engineering",
-      location: "Rajkot",
-      period: "Course Completed",
-      type: "Certification",
+      degree: "SSC",
+      institution: "Eklavya School",
+      location: "Chotila (Surendranagar)",
+      period: "2018-2019",
+      type: "",
       icon: Award,
       color: "from-green-500 to-emerald-500"
     }
   ];
 
   const certifications = [
-    "Web Development with React",
-    "JavaScript ES6+ Fundamentals",
-    "Responsive Web Design",
-    "Git & Version Control"
+    "React with Redux Course - UDEMY",
+    "Web Development Course",
   ];
 
   useEffect(() => {
@@ -74,15 +72,15 @@ const Education = () => {
           </p>
         </div>
 
-        <div ref={educationRef} className="grid lg:grid-cols-2 gap-12">
+        <div ref={educationRef} className="">
           {/* Education */}
-          <div>
+          <div className=''>
             <h3 className="text-3xl font-bold text-white mb-8 flex items-center">
               <GraduationCap className="mr-3 text-blue-400" size={32} />
               Education
             </h3>
-            
-            <div className="space-y-6">
+
+            <div className="grid grid-cols-2 w-full gap-4">
               {education.map((edu, index) => (
                 <div
                   key={index}
@@ -93,20 +91,22 @@ const Education = () => {
                     <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${edu.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                       <edu.icon size={24} className="text-white" />
                     </div>
-                    <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30">
-                      {edu.type}
-                    </span>
+                    {edu.type && (
+                      <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30">
+                        {edu.type}
+                      </span>
+                    )}
                   </div>
 
                   <h4 className="text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-500 group-hover:bg-clip-text transition-all duration-300">
                     {edu.degree}
                   </h4>
-                  
+
                   <div className="text-gray-300 mb-2 flex items-center">
                     <GraduationCap size={16} className="mr-2 text-gray-400" />
                     {edu.institution}
                   </div>
-                  
+
                   <div className="flex items-center justify-between text-gray-400 text-sm">
                     <div className="flex items-center">
                       <MapPin size={14} className="mr-1" />
@@ -123,12 +123,12 @@ const Education = () => {
           </div>
 
           {/* Certifications */}
-          <div>
+          {/* <div>
             <h3 className="text-3xl font-bold text-white mb-8 flex items-center">
               <Award className="mr-3 text-purple-400" size={32} />
               Certifications
             </h3>
-            
+
             <div className="space-y-4">
               {certifications.map((cert, index) => (
                 <div
@@ -146,18 +146,7 @@ const Education = () => {
               ))}
             </div>
 
-            {/* Achievement Stats */}
-            <div className="mt-8 grid grid-cols-2 gap-4">
-              <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl p-6 border border-blue-500/30 text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-2">4+</div>
-                <div className="text-gray-300 text-sm">Certifications</div>
-              </div>
-              <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl p-6 border border-purple-500/30 text-center">
-                <div className="text-3xl font-bold text-purple-400 mb-2">2+</div>
-                <div className="text-gray-300 text-sm">Years Learning</div>
-              </div>
-            </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

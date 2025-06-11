@@ -96,13 +96,13 @@ const Contact = () => {
           </p>
         </div>
 
-        <div ref={contactRef} className="grid lg:grid-cols-2 gap-12">
+        <div ref={contactRef} className="">
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
               <h3 className="text-3xl font-bold text-white mb-6">Let's Connect</h3>
               <p className="text-gray-300 leading-relaxed mb-8">
-                I'm always interested in hearing about new opportunities and exciting projects. 
+                I'm always interested in hearing about new opportunities and exciting projects.
                 Whether you have a question or just want to say hi, feel free to reach out!
               </p>
             </div>
@@ -131,7 +131,7 @@ const Contact = () => {
             {/* Social Links */}
             <div className="flex space-x-4 pt-6">
               <a
-                href="https://github.com"
+                href="https://github.com/patel-bhargavi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/25 group"
@@ -139,7 +139,7 @@ const Contact = () => {
                 <Github size={24} className="group-hover:text-blue-400 transition-colors duration-300" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/bhargavi-patel-1016b9238/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/25 group"
@@ -149,96 +149,12 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-gray-300 text-sm font-medium mb-2">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-white placeholder-gray-400"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-gray-300 text-sm font-medium mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-white placeholder-gray-400"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-gray-300 text-sm font-medium mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-white placeholder-gray-400"
-                  placeholder="Project discussion"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-gray-300 text-sm font-medium mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-white placeholder-gray-400 resize-none"
-                  placeholder="Tell me about your project..."
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-              >
-                {isSubmitting ? (
-                  <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                ) : (
-                  <>
-                    <Send size={20} className="mr-2" />
-                    Send Message
-                  </>
-                )}
-              </button>
-            </form>
-          </div>
         </div>
 
         {/* Footer */}
         <div className="text-center mt-16 pt-8 border-t border-gray-800">
           <p className="text-gray-400">
-            © 2024 Bhargavi Patel. Built with React & Tailwind CSS
+            © 2025 Bhargavi Patel. Built with React & Tailwind CSS
           </p>
         </div>
       </div>

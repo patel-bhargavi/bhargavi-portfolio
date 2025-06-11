@@ -29,14 +29,14 @@ const Hero = () => {
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!laptopRef.current) return;
-    
+
     const rect = laptopRef.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    
+
     const rotateX = (e.clientY - centerY) / 10;
     const rotateY = (e.clientX - centerX) / 10;
-    
+
     setMousePosition({ x: rotateY, y: -rotateX });
   };
 
@@ -63,10 +63,9 @@ const Hero = () => {
         <div className="flex items-center justify-center flex-col lg:flex-row gap-12 lg:gap-20 mb-8">
           {/* Name Section */}
           <div className="flex-1 lg:text-left">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-fade-in">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-fade-in">
               Bhargavi Patel
             </h1>
-            
             <p className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-4 animate-fade-in delay-300">
               Front-End Developer
             </p>
@@ -74,7 +73,7 @@ const Hero = () => {
 
           {/* 3D Interactive Developer Laptop Animation */}
           <div className="flex-shrink-0">
-            <div 
+            <div
               ref={laptopRef}
               className="w-80 h-80 relative perspective-1000 cursor-pointer"
               onMouseMove={handleMouseMove}
@@ -82,12 +81,11 @@ const Hero = () => {
               onMouseEnter={handleMouseEnter}
             >
               {/* Laptop Base with 3D interaction */}
-              <div 
-                className={`absolute inset-0 transition-transform duration-300 ease-out ${
-                  isHovering ? '' : 'animate-laptop-float'
-                }`}
+              <div
+                className={`absolute inset-0 transition-transform duration-300 ease-out ${isHovering ? '' : 'animate-laptop-float'
+                  }`}
                 style={{
-                  transform: isHovering 
+                  transform: isHovering
                     ? `rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg) translateZ(0)`
                     : undefined
                 }}
@@ -106,7 +104,7 @@ const Hero = () => {
                     <div className="absolute bottom-3 left-3 w-1 h-4 bg-green-400 animate-cursor-blink"></div>
                   </div>
                 </div>
-                
+
                 {/* Laptop Keyboard */}
                 <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-52 h-20 bg-gradient-to-b from-gray-700 to-gray-800 rounded-b-lg border-2 border-gray-600">
                   {/* Keyboard Keys */}
@@ -122,7 +120,7 @@ const Hero = () => {
                   {/* Trackpad */}
                   <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-gray-600 rounded border border-gray-500"></div>
                 </div>
-                
+
                 {/* Floating Code Elements */}
                 <div className="absolute inset-0">
                   {/* React Icon */}
@@ -131,33 +129,33 @@ const Hero = () => {
                       <div className="absolute inset-1 border border-current rounded-full"></div>
                     </div>
                   </div>
-                  
+
                   {/* JavaScript Symbol */}
                   <div className="absolute top-12 left-4 w-6 h-6 bg-yellow-400 text-black flex items-center justify-center text-xs font-bold rounded animate-float-code" style={{ animationDelay: '0.5s' }}>
                     JS
                   </div>
-                  
+
                   {/* CSS Symbol */}
                   <div className="absolute bottom-12 right-8 w-6 h-6 bg-blue-500 text-white flex items-center justify-center text-xs font-bold rounded animate-float-code" style={{ animationDelay: '1s' }}>
                     CSS
                   </div>
-                  
+
                   {/* HTML Brackets */}
                   <div className="absolute bottom-16 left-8 text-orange-400 text-lg font-mono animate-float-code" style={{ animationDelay: '1.5s' }}>
                     {'</>'}
                   </div>
-                  
+
                   {/* Binary Code Stream */}
                   <div className="absolute top-16 left-16 text-green-400 text-xs font-mono animate-binary-stream" style={{ animationDelay: '2s' }}>
                     101010
                   </div>
-                  
+
                   {/* Git Branch */}
                   <div className="absolute bottom-20 right-16 text-purple-400 text-sm animate-float-code" style={{ animationDelay: '2.5s' }}>
                     git
                   </div>
                 </div>
-                
+
                 {/* Orbiting Particles */}
                 <div className={`absolute inset-0 ${isHovering ? 'animate-pulse' : 'animate-orbit-laptop'}`}>
                   <div className="absolute top-8 left-8 w-2 h-2 bg-blue-400 rounded-full animate-pulse shadow-lg shadow-blue-400/50"></div>
@@ -167,10 +165,10 @@ const Hero = () => {
               </div>
 
               {/* 3D Depth Shadow */}
-              <div 
+              <div
                 className="absolute inset-0 bg-black/20 blur-xl transform translate-y-4 translate-x-4 -z-10 transition-transform duration-300"
                 style={{
-                  transform: isHovering 
+                  transform: isHovering
                     ? `translateY(${4 + mousePosition.y / 4}px) translateX(${4 + mousePosition.x / 4}px)`
                     : undefined
                 }}
@@ -178,15 +176,15 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        
+
         <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto animate-fade-in delay-500">
-          Passionate about creating innovative, user-friendly web applications using React, 
+          Passionate about creating innovative, user-friendly web applications using React,
           JavaScript, and modern web technologies. Focused on delivering high-quality solutions.
         </p>
 
         <div className="flex justify-center space-x-6 mb-12 animate-fade-in delay-700">
           <a
-            href="https://github.com"
+            href="https://github.com/patel-bhargavi"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/25"
@@ -194,7 +192,7 @@ const Hero = () => {
             <Github size={24} />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/bhargavi-patel-1016b9238/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/25"
@@ -202,7 +200,7 @@ const Hero = () => {
             <Linkedin size={24} />
           </a>
           <a
-            href="mailto:your.email@example.com"
+            href="mailto:work.bhargavi@yahoo.com"
             className="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/25"
           >
             <Mail size={24} />

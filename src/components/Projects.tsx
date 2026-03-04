@@ -19,7 +19,8 @@ const Projects = () => {
       technologies: ["React", "Three.js", "Google AR Core", "WebGL", "3D Visualization"],
       icon: Palette,
       gradient: "from-purple-500 to-pink-500",
-      link: "https://react-ar-3dmodel-viewer.vercel.app/"
+      link: "https://react-ar-3dmodel-viewer.vercel.app/",
+      github: "https://github.com/patel-bhargavi/react-ar-model-viewer"
     },
     {
       title: "React 360 Panorama View",
@@ -27,7 +28,8 @@ const Projects = () => {
       technologies: ["React", "Three.js", "Panorama Viewer", "Touch Controls", "WebGL"],
       icon: Code,
       gradient: "from-cyan-500 to-blue-500",
-      link: "https://react-360view-panorama.vercel.app/"
+      link: "https://react-360view-panorama.vercel.app/",
+      github: "https://github.com/patel-bhargavi/react-360-panorama"
     },
     {
       title: "Catloga – Digital Tile Catalogue Maker",

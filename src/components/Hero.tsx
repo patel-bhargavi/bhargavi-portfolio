@@ -67,7 +67,7 @@ const Hero = () => {
               Bhargavi Patel
             </h1>
             <p className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-4 animate-fade-in delay-300">
-              Front-End Developer
+              Full Stack Developer
             </p>
           </div>
 

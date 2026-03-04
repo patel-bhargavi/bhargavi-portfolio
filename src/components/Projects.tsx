@@ -14,6 +14,15 @@ const Projects = () => {
       gradient: "from-blue-500 to-cyan-500"
     },
     {
+      title: "Aries Maintanance Servic",
+      description: "Aries Maintanance Service is a platform for managing and tracking maintenance requests for a company. It allows users to create, view, and update maintenance requests, as well as view and update maintenance history. It also allows users to view and update maintenance history.",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "React Hook Form", "Authentication"],
+      icon: Database,
+      gradient: "from-blue-500 to-cyan-500",
+      link: "https://aries-maintanance.vercel.app/",
+      github: "https://github.com/patel-bhargavi/aries-glow-landing-site"
+    },
+    {
       title: "Catloga – Digital Tile Catalogue Maker",
       description: "Developed a digital tile catalogue platform that enables businesses to easily create, manage, and showcase their tile collections online. Designed an intuitive and visually appealing user interface using React and Tailwind CSS, allowing users to upload product images, organize tiles by categories, and generate interactive digital catalogues. Integrated secure authentication and efficient data management for seamless user experience. This project streamlined the process of presenting and sharing tile collections with clients, enhancing business visibility and customer engagement.",
       technologies: ["React", "Tailwind CSS", "Authentication", "UI/UX Design", "React Query"],

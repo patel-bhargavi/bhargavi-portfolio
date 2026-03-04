@@ -59,21 +59,21 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "bhargavi.patel@email.com",
-      link: "mailto:bhargavi.patel@email.com",
+      value: "patelbhargavi1624@email.com",
+      link: "mailto:patelbhargavi1624@email.com",
       color: "from-blue-500 to-cyan-500"
     },
     {
       icon: Phone,
       title: "Phone",
-      value: "+91 98765 43210",
-      link: "tel:+919876543210",
+      value: "+91 99787 76575",
+      link: "tel:+919978776575",
       color: "from-green-500 to-emerald-500"
     },
     {
       icon: MapPin,
       title: "Location",
-      value: "Gujarat, India",
+      value: "Ahmedabad, Gujarat, India",
       link: "#",
       color: "from-purple-500 to-pink-500"
     }

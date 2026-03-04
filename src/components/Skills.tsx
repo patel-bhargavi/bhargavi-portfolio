@@ -7,13 +7,15 @@ const Skills = () => {
 
   const skills = [
     { name: 'React.js', level: 90, color: 'from-blue-500 to-cyan-500' },
-    { name: 'JavaScript', level: 85, color: 'from-yellow-500 to-orange-500' },
+    { name: 'Node.js', level: 80, color: 'from-green-500 to-emerald-500' },
+    { name: 'Express', level: 75, color: 'from-rose-500 to-pink-400' },
+    { name: 'PostgreSQL', level: 70, color: 'from-sky-600 to-sky-400' },
+    { name: 'Next.js', level: 80, color: 'from-violet-600 to-violet-400' },
+    { name: 'Vue.js', level: 65, color: 'from-cyan-500 to-blue-400' },
     { name: 'TypeScript', level: 85, color: 'from-blue-600 to-blue-400' },
-    { name: 'HTML/CSS', level: 95, color: 'from-orange-500 to-red-500' },
-    { name: 'Node.js', level: 45, color: 'from-green-500 to-emerald-500' },
-    { name: 'MySQL', level: 80, color: 'from-orange-600 to-yellow-500' },
-    { name: 'PostgreSQL', level: 40, color: 'from-blue-700 to-blue-500' },
-    { name: 'Redux', level: 85, color: 'from-purple-600 to-purple-400' }
+    { name: 'JavaScript', level: 90, color: 'from-yellow-500 to-orange-500' },
+    { name: 'MySQL', level: 75, color: 'from-orange-600 to-yellow-500' },
+    { name: 'HTML/CSS', level: 95, color: 'from-orange-500 to-red-500' }
   ];
 
   useEffect(() => {

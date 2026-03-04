@@ -60,27 +60,39 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <p className="text-lg text-gray-300 leading-relaxed">
-              I am a dedicated Front-End Developer with expertise in building innovative, 
-              user-friendly web applications using React's ecosystem. Skilled in integrating 
-              cutting-edge design with functional UI to deliver engaging user experiences.
+              I am a Full Stack Developer specializing in MERN and modern web frameworks. I build scalable, production-ready web applications using React, Node.js, Express, and PostgreSQL — and also work with Next.js, Vue.js, and TypeScript for modern frontend experiences.
             </p>
             <p className="text-lg text-gray-300 leading-relaxed">
-              My experience spans developing comprehensive solutions, optimizing performance, 
-              and delivering scalable applications that meet modern web standards.
+              Experienced in API design, authentication, database integration, and deploying end-to-end solutions with a focus on performance and maintainability.
             </p>
-            
+
             <div className="flex flex-wrap gap-4 mt-8">
               <span className="px-4 py-2 bg-blue-500/20 text-blue-300 rounded-full text-sm border border-blue-500/30">
                 React.js
               </span>
-              <span className="px-4 py-2 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">
-                JavaScript
-              </span>
               <span className="px-4 py-2 bg-green-500/20 text-green-300 rounded-full text-sm border border-green-500/30">
                 Node.js
               </span>
-              <span className="px-4 py-2 bg-yellow-500/20 text-yellow-300 rounded-full text-sm border border-yellow-500/30">
+              <span className="px-4 py-2 bg-rose-500/20 text-rose-300 rounded-full text-sm border border-rose-500/30">
+                Express
+              </span>
+              <span className="px-4 py-2 bg-sky-500/20 text-sky-300 rounded-full text-sm border border-sky-500/30">
+                PostgreSQL
+              </span>
+              <span className="px-4 py-2 bg-violet-500/20 text-violet-300 rounded-full text-sm border border-violet-500/30">
+                Next.js
+              </span>
+              <span className="px-4 py-2 bg-cyan-500/20 text-cyan-300 rounded-full text-sm border border-cyan-500/30">
+                Vue.js
+              </span>
+              <span className="px-4 py-2 bg-blue-600/20 text-blue-400 rounded-full text-sm border border-blue-600/30">
                 TypeScript
+              </span>
+              <span className="px-4 py-2 bg-yellow-500/20 text-yellow-300 rounded-full text-sm border border-yellow-500/30">
+                JavaScript
+              </span>
+              <span className="px-4 py-2 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">
+                MySQL
               </span>
             </div>
           </div>

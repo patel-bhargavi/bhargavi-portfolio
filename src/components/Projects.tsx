@@ -93,9 +93,9 @@ const Projects = () => {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-300 cursor-pointer"
+                        className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-300 cursor-pointer hover:scale-110 transform"
                       >
-                        <Github size={20} />
+                        <Github size={20} className="text-white hover:text-blue-400" />
                       </a>
                     )}
                     {project.link && (
@@ -103,9 +103,9 @@ const Projects = () => {
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-300 cursor-pointer"
+                        className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-300 cursor-pointer hover:scale-110 transform"
                       >
-                        <ExternalLink size={20} />
+                        <ExternalLink size={20} className="text-white hover:text-blue-400" />
                       </a>
                     )}
                   </div>

@@ -1,22 +1,18 @@
-# Welcome to your Lovable project
+# Bhargavi Patel - Portfolio
 
-## Project info
+A modern, responsive full stack developer portfolio built with React, TypeScript, and Tailwind CSS.
 
-**URL**: https://lovable.dev/projects/d77b30af-716c-4834-80da-b1f5d2707407
+## About This Portfolio
+
+This is my personal portfolio showcasing my projects, skills, experience, and expertise as a Full Stack Developer.
 
 ## How can I edit this code?
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/d77b30af-716c-4834-80da-b1f5d2707407) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
+There are several ways of editing this portfolio.
 
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Clone this repository and edit locally using your favorite code editor.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -62,12 +58,9 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/d77b30af-716c-4834-80da-b1f5d2707407) and click on Share -> Publish.
+You can deploy this portfolio to services like Vercel, Netlify, or GitHub Pages. Simply push your changes to GitHub and configure your deployment platform accordingly.
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+For Vercel:
+1. Connect your GitHub repository
+2. Configure build settings
+3. Deploy and get a live URL

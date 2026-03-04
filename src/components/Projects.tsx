@@ -14,13 +14,20 @@ const Projects = () => {
       gradient: "from-blue-500 to-cyan-500"
     },
     {
-      title: "Aries Maintanance Servic",
-      description: "Aries Maintanance Service is a platform for managing and tracking maintenance requests for a company. It allows users to create, view, and update maintenance requests, as well as view and update maintenance history. It also allows users to view and update maintenance history.",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "React Hook Form", "Authentication"],
-      icon: Database,
-      gradient: "from-blue-500 to-cyan-500",
-      link: "https://aries-maintanance.vercel.app/",
-      github: "https://github.com/patel-bhargavi/aries-glow-landing-site"
+      title: "360 View AI – 3D Model Viewer with Google AR",
+      description: "Built an interactive 3D model viewer application that leverages Google's AR Core for immersive augmented reality experiences. Features include 360-degree product visualization, interactive model rotation, and real-time AR preview. Implemented using React with Three.js integration for smooth 3D rendering and performance optimization. Users can view products in their own environment using AR modal, enhancing the online shopping and product showcase experience.",
+      technologies: ["React", "Three.js", "Google AR Core", "WebGL", "3D Visualization"],
+      icon: Palette,
+      gradient: "from-purple-500 to-pink-500",
+      link: "https://react-ar-3dmodel-viewer.vercel.app/"
+    },
+    {
+      title: "React 360 Panorama View",
+      description: "Developed a panoramic 360-degree image viewer using React with advanced visualization capabilities. The application provides seamless panoramic viewing experience with mouse and touch controls, allowing users to explore immersive 360 environments. Integrated with visualizer tools for professional product showcase and virtual tours. Perfect for real estate, tourism, and product visualization applications.",
+      technologies: ["React", "Three.js", "Panorama Viewer", "Touch Controls", "WebGL"],
+      icon: Code,
+      gradient: "from-cyan-500 to-blue-500",
+      link: "https://react-360view-panorama.vercel.app/"
     },
     {
       title: "Catloga – Digital Tile Catalogue Maker",

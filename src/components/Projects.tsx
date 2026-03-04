@@ -88,12 +88,26 @@ const Projects = () => {
                     <project.icon size={32} className="text-white" />
                   </div>
                   <div className="flex space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-300">
-                      <Github size={20} />
-                    </button>
-                    <button className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-300">
-                      <ExternalLink size={20} />
-                    </button>
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-300 cursor-pointer"
+                      >
+                        <Github size={20} />
+                      </a>
+                    )}
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-300 cursor-pointer"
+                      >
+                        <ExternalLink size={20} />
+                      </a>
+                    )}
                   </div>
                 </div>
 

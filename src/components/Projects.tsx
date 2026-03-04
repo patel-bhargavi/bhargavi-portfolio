@@ -87,7 +87,7 @@ const Projects = () => {
                   <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                     <project.icon size={32} className="text-white" />
                   </div>
-                  <div className="flex space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative z-20 pointer-events-auto">
                     {project.github && (
                       <a
                         href={project.github}

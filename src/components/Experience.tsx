@@ -7,10 +7,19 @@ const Experience = () => {
 
   const experiences = [
     {
+      title: "Full Stack Developer",
+      company: "Karavya Solutions LLP - Ahmedabad",
+      period: "July 2025 - Present",
+      type: "FULL STACK DEVELOPER",
+      description:
+        "As a Full Stack Developer, I design and develop comprehensive web applications using the MERN stack and modern technologies. I build robust backend APIs with Node.js and Express, design efficient databases using PostgreSQL and MongoDB, and create responsive, interactive frontends with React and Next.js. I handle the complete development lifecycle from architecture and design to deployment and maintenance. Collaborate with cross-functional teams to deliver production-ready solutions, optimize application performance, and implement best practices for code quality and scalability.",
+      skills: ["React", "Next.js", "Node.js", "Express", "PostgreSQL", "MongoDB", "TypeScript", "API Development", "Database Design", "Full Stack Architecture"]
+    },
+    {
       title: "Junior Front-end Developer",
       company: "Sang Media - Morbi (Gujarat)",
       period: "September 2024 - April 2025",
-      type: "INTERN FRONT END DEVELOPER",
+      type: "JUNIOR FRONT END DEVELOPER",
       description:
         "As a Frontend Developer, I developed and optimized dynamic, scalable web applications using React.js and Next.js, focusing on performance and user experience. I implemented and integrated RESTful APIs to ensure smooth backend communication and leveraged Redux Toolkit and React Query (TanStack Query) for efficient state and data management. I crafted responsive, visually consistent UIs using Tailwind CSS and Bootstrap, adhering to modern design principles. Additionally, I collaborated with cross-functional teams and utilized Node.js for minor backend tasks, contributing to a more cohesive development workflow.",
       skills: ["React", "Next.js", "Redux Toolkit", "React Query", "RESTful APIs", "Tailwind CSS", "Bootstrap", "Node.js", "Team Collaboration"]

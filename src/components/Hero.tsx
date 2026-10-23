@@ -84,12 +84,12 @@ export default function Hero() {
         </motion.div>
 
         <div className="relative z-10 min-w-0">
-          {canRender ? (
-            <div className="hidden h-[420px] sm:h-[480px] lg:block lg:h-[560px]" aria-hidden="true" />
-          ) : (
-            <div className="relative h-[420px] w-full sm:h-[480px] lg:h-[560px]">
+          {canRender === false ? (
+            <div className="relative h-[300px] w-full sm:h-[380px] lg:h-[560px]">
               <HeroFallback />
             </div>
+          ) : (
+            <div id="hero-model" className="h-[300px] w-full sm:h-[380px] lg:h-[560px]" aria-hidden="true" />
           )}
         </div>
       </div>

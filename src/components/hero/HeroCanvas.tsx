@@ -85,18 +85,23 @@ function Desktop() {
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
     const pose = mix(progress);
+    const compact = state.size.width < 1024;
+    const anchor = compact ? document.getElementById("hero-model")?.getBoundingClientRect() : null;
+    const x = anchor ? ((anchor.left + anchor.width / 2) / state.size.width - 0.5) * 4.6 + 0.15 : pose.x;
+    const y = anchor ? (0.5 - (anchor.top + anchor.height / 2) / state.size.height) * 7.2 - 0.15 : pose.y;
+    const scale = anchor ? Math.min(state.size.width / 920, 0.55) : pose.scale;
 
     screenRight.setFromMatrixColumn(state.camera.matrixWorld, 0);
     screenUp.setFromMatrixColumn(state.camera.matrixWorld, 1);
     const depth = screenDepth.crossVectors(screenRight, screenUp);
     rig.position.set(
-      screenRight.x * pose.x + screenUp.x * pose.y + depth.x * pose.z,
-      screenRight.y * pose.x + screenUp.y * pose.y + depth.y * pose.z,
-      screenRight.z * pose.x + screenUp.z * pose.y + depth.z * pose.z,
+      screenRight.x * x + screenUp.x * y + depth.x * pose.z,
+      screenRight.y * x + screenUp.y * y + depth.y * pose.z,
+      screenRight.z * x + screenUp.z * y + depth.z * pose.z,
     );
     rig.rotation.x = pose.rx;
     rig.rotation.y = pose.ry + mouse.current;
-    rig.scale.set(pose.scale, pose.scale, pose.scale);
+    rig.scale.set(scale, scale, scale);
   });
 
   return (

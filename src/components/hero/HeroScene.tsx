@@ -17,7 +17,7 @@ class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean
 
 export default function HeroScene() {
   const canRender = useCanRender3D();
-  if (!canRender) return null;
+  if (canRender !== true) return null;
 
   return (
     <div className="pointer-events-none fixed inset-0 z-0">

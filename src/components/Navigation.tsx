@@ -77,13 +77,13 @@ export default function Navigation() {
           <div className="flex items-center gap-2">
             <a
               href="#contact"
-              className="hidden rounded-full bg-white px-4 py-2 text-sm font-medium text-zinc-950 transition hover:bg-violet-100 sm:inline-flex"
+              className="hover-btn hidden rounded-full bg-white px-4 py-2 text-sm font-medium text-zinc-950 hover:bg-violet-100 sm:inline-flex"
             >
               Let’s Work Together
             </a>
             <button
               type="button"
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-white lg:hidden"
+              className="hover-btn icon-quiet grid h-10 w-10 place-items-center rounded-full border border-white/10 text-white lg:hidden"
               aria-expanded={open}
               aria-controls="mobile-nav"
               onClick={() => setOpen((value) => !value)}
@@ -110,7 +110,7 @@ export default function Navigation() {
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="mt-4 inline-flex justify-center rounded-full bg-white px-4 py-3 text-sm font-medium text-zinc-950"
+                className="hover-btn mt-4 inline-flex justify-center rounded-full bg-white px-4 py-3 text-sm font-medium text-zinc-950"
               >
                 Let’s Work Together
               </a>

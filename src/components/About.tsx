@@ -51,7 +51,7 @@ export default function About() {
           <div className="grid gap-3 sm:grid-cols-2">
             {points.map((point, index) => (
               <Reveal key={point.title} delay={index * 0.06}>
-                <article className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
+                <article className="hover-card h-full rounded-3xl border border-white/10 bg-white/[0.03] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
                   <point.icon className="text-violet-300" size={20} />
                   <h3 className="mt-4 font-display text-lg text-white">{point.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-zinc-400">{point.text}</p>

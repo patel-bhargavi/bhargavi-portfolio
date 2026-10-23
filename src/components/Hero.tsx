@@ -49,20 +49,20 @@ export default function Hero() {
           <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-violet-500 px-5 py-3 text-sm font-medium text-white shadow-[0_10px_40px_rgba(109,40,217,0.35)] transition hover:bg-violet-400"
+              className="hover-btn inline-flex items-center gap-2 rounded-full bg-violet-500 px-5 py-3 text-sm font-medium text-white shadow-[0_10px_40px_rgba(109,40,217,0.35)] hover:bg-violet-400"
             >
               Let’s Work Together
               <ArrowDownRight size={16} />
             </a>
             <a
               href="#projects"
-              className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/10"
+              className="hover-btn inline-flex items-center rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-medium text-white hover:border-white/30 hover:bg-white/10"
             >
               Explore My Work
             </a>
             <a
               href={mailtoHref({ subject: "Resume request", message: "Hello Bhargavi, please send your resume." })}
-              className="inline-flex items-center rounded-full px-4 py-3 text-sm font-medium text-zinc-300 underline-offset-4 transition hover:text-white hover:underline"
+              className="hover-btn inline-flex items-center rounded-full px-4 py-3 text-sm font-medium text-zinc-300 underline-offset-4 hover:text-white hover:underline"
             >
               Request Resume
             </a>
@@ -75,7 +75,7 @@ export default function Hero() {
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel={link.href.startsWith("http") ? "noreferrer" : undefined}
                 aria-label={link.label}
-                className="grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/5 text-zinc-200 transition hover:border-violet-300/40 hover:text-white"
+                className="hover-btn icon-quiet grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/5 text-zinc-200 hover:border-violet-300/40 hover:text-white"
               >
                 <link.icon size={18} />
               </a>

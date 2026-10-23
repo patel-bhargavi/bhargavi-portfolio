@@ -75,7 +75,7 @@ export default function Contact() {
           <Reveal className="space-y-3">
             <ContactLink icon={Mail} label="Email" value={profile.email} href={`mailto:${profile.email}`} />
             <ContactLink icon={Phone} label="Phone" value={profile.phone} href={profile.phoneHref} />
-            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+            <div className="hover-card flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
               <span className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-violet-200">
                 <MapPin size={16} />
               </span>
@@ -88,7 +88,7 @@ export default function Contact() {
             <ContactLink icon={Linkedin} label="LinkedIn" value="Bhargavi Patel" href={profile.linkedin} external />
             <a
               href={mailtoHref({ subject: "Resume request", message: "Hello Bhargavi, please send your resume." })}
-              className="inline-flex pt-2 text-sm font-medium text-violet-200 underline-offset-4 hover:underline"
+              className="hover-btn inline-flex pt-2 text-sm font-medium text-violet-200 underline-offset-4 hover:underline"
             >
               Request resume by email
             </a>
@@ -122,7 +122,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="rounded-full bg-violet-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-violet-400 disabled:cursor-wait disabled:opacity-70"
+                  className="hover-btn rounded-full bg-violet-500 px-5 py-3 text-sm font-medium text-white hover:bg-violet-400 disabled:cursor-wait disabled:opacity-70"
                 >
                   {isSubmitting ? "Sending…" : "Send message"}
                 </button>
@@ -171,7 +171,7 @@ function ContactLink({
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer" : undefined}
-      className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 transition hover:border-white/20"
+      className="hover-card flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3"
     >
       <span className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-violet-200">
         <Icon size={16} />

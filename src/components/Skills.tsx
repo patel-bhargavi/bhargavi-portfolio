@@ -52,7 +52,7 @@ export default function Skills() {
                   aria-controls={`skill-panel-${group.id}`}
                   tabIndex={selected ? 0 : -1}
                   onClick={() => setActiveId(group.id)}
-                  className={`min-w-fit rounded-2xl border px-4 py-3 text-left text-sm transition lg:w-full ${
+                  className={`hover-card min-w-fit rounded-2xl border px-4 py-3 text-left text-sm lg:w-full ${
                     selected
                       ? "border-violet-300/40 bg-violet-400/10 text-white"
                       : "border-white/10 bg-white/[0.03] text-zinc-400 hover:text-white"
@@ -80,7 +80,7 @@ export default function Skills() {
             </div>
             <ul className="grid gap-3 sm:grid-cols-2">
               {active.items.map((item) => (
-                <li key={item.name} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <li key={item.name} className="hover-card rounded-2xl border border-white/10 bg-white/[0.03] p-4">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <h4 className="font-medium text-white">{item.name}</h4>
                     <span className={`rounded-full border px-2.5 py-1 text-[11px] tracking-wide ${depthTone[item.depth]}`}>

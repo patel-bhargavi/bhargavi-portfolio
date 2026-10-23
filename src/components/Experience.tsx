@@ -15,7 +15,7 @@ export default function Experience() {
         <ol className="mt-14 space-y-5">
           {experiences.map((job, index) => (
             <Reveal key={job.title + job.period} delay={index * 0.05}>
-              <li className="grid gap-6 rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:grid-cols-[220px_minmax(0,1fr)] md:p-8">
+              <li className="hover-card grid gap-6 rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:grid-cols-[220px_minmax(0,1fr)] md:p-8">
                 <div>
                   <p className="text-sm text-violet-200">{job.period}</p>
                   <p className="mt-3 font-medium text-white">{job.company}</p>
@@ -50,7 +50,7 @@ export default function Experience() {
           <div className="mt-6 grid gap-3 md:grid-cols-2">
             {approach.map((item, index) => (
               <Reveal key={item.title} delay={index * 0.04}>
-                <article className="h-full rounded-3xl border border-white/10 p-5">
+                <article className="hover-card h-full rounded-3xl border border-white/10 p-5">
                   <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">0{index + 1}</p>
                   <h4 className="mt-3 font-medium text-white">{item.title}</h4>
                   <p className="mt-2 text-sm leading-relaxed text-zinc-400">{item.text}</p>

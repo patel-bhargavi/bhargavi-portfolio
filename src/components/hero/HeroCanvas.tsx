@@ -14,22 +14,42 @@ type Pose = {
   scale: number;
 };
 
-const poses: Array<Pose & { t: number }> = [
-  { t: 0, x: 2.65, y: 0.85, z: 0, rx: 0, ry: 0, scale: 1 },
-  { t: 0.25, x: 3.05, y: 1.15, z: 0, rx: 0.04, ry: 0.48, scale: 0.86 },
-  { t: 0.5, x: 2.15, y: 0.6, z: 0, rx: -0.03, ry: -0.25, scale: 1.08 },
-  { t: 0.75, x: 2.95, y: 1.1, z: 0, rx: 0.04, ry: 0.58, scale: 0.84 },
-  { t: 1, x: 2.4, y: 0.75, z: 0, rx: 0, ry: 0.1, scale: 0.94 },
+const sections = ["home", "about", "skills", "projects", "experience", "architecture", "education", "contact"] as const;
+
+const poses: Pose[] = [
+  { x: 4.75, y: -0.15, z: 0, rx: 0.02, ry: -0.1, scale: 1 },
+  { x: 5.25, y: 0.2, z: 0, rx: 0.08, ry: 0.48, scale: 1 },
+  { x: 5.2, y: -0.35, z: 0, rx: -0.06, ry: -0.52, scale: 1 },
+  { x: 5.3, y: 0.25, z: 0, rx: 0.04, ry: 0.62, scale: 1 },
+  { x: 5.05, y: -0.2, z: 0, rx: 0.1, ry: -0.28, scale: 1 },
+  { x: 5.2, y: 0.1, z: 0, rx: -0.04, ry: 0.36, scale: 1 },
+  { x: 5.15, y: -0.3, z: 0, rx: 0.06, ry: -0.46, scale: 1 },
+  { x: 4.9, y: -0.15, z: 0, rx: 0.02, ry: 0.08, scale: 1 },
 ];
+
+const marks = poses.map((_, index) => index / (poses.length - 1));
+
+function updateMarks() {
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  if (maxScroll <= 0) return;
+  sections.forEach((id, index) => {
+    const element = document.getElementById(id);
+    const top = element ? element.getBoundingClientRect().top + window.scrollY : 0;
+    marks[index] = Math.min(Math.max(top / maxScroll, 0), 1);
+  });
+  for (let index = 1; index < marks.length; index += 1) {
+    if (marks[index] < marks[index - 1]) marks[index] = marks[index - 1];
+  }
+}
 
 function mix(progress: number): Pose {
   const t = Math.min(Math.max(progress, 0), 1);
   let index = 0;
-  while (index < poses.length - 2 && poses[index + 1].t < t) index += 1;
+  while (index < marks.length - 2 && marks[index + 1] <= t) index += 1;
+  const span = marks[index + 1] - marks[index] || 1;
+  const amount = Math.min(Math.max((t - marks[index]) / span, 0), 1);
   const from = poses[index];
   const to = poses[index + 1];
-  const span = to.t - from.t || 1;
-  const amount = (t - from.t) / span;
   const lerp = (start: number, end: number) => start + (end - start) * amount;
   return {
     x: lerp(from.x, to.x),
@@ -43,11 +63,11 @@ function mix(progress: number): Pose {
 
 const screenRight = new Vector3();
 const screenUp = new Vector3();
+const screenDepth = new Vector3();
 
 function Desktop() {
   const { scene } = useGLTF("/desktop_pc/scene.gltf");
   const group = useRef<Group>(null);
-  const scroll = useRef(0);
   const mouse = useRef(0);
 
   useEffect(() => {
@@ -61,30 +81,27 @@ function Desktop() {
   useFrame((state) => {
     const rig = group.current;
     if (!rig) return;
+    updateMarks();
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const target = maxScroll > 0 ? window.scrollY / maxScroll : 0;
-    scroll.current += (target - scroll.current) * 0.08;
-    const pose = mix(scroll.current);
+    const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+    const pose = mix(progress);
 
     screenRight.setFromMatrixColumn(state.camera.matrixWorld, 0);
     screenUp.setFromMatrixColumn(state.camera.matrixWorld, 1);
-    const nextX = screenRight.x * pose.x + screenUp.x * pose.y;
-    const nextY = screenRight.y * pose.x + screenUp.y * pose.y;
-    const nextZ = screenRight.z * pose.x + screenUp.z * pose.y;
-
-    rig.position.x += (nextX - rig.position.x) * 0.14;
-    rig.position.y += (nextY - rig.position.y) * 0.14;
-    rig.position.z += (nextZ - rig.position.z) * 0.14;
-    rig.rotation.x += (pose.rx - rig.rotation.x) * 0.14;
-    rig.rotation.y += (pose.ry + mouse.current - rig.rotation.y) * 0.14;
-    rig.scale.x += (pose.scale - rig.scale.x) * 0.14;
-    rig.scale.y = rig.scale.x;
-    rig.scale.z = rig.scale.x;
+    const depth = screenDepth.crossVectors(screenRight, screenUp);
+    rig.position.set(
+      screenRight.x * pose.x + screenUp.x * pose.y + depth.x * pose.z,
+      screenRight.y * pose.x + screenUp.y * pose.y + depth.y * pose.z,
+      screenRight.z * pose.x + screenUp.z * pose.y + depth.z * pose.z,
+    );
+    rig.rotation.x = pose.rx;
+    rig.rotation.y = pose.ry + mouse.current;
+    rig.scale.set(pose.scale, pose.scale, pose.scale);
   });
 
   return (
     <group ref={group}>
-      <primitive object={scene} scale={0.62} position={[0, -2.35, -1]} rotation={[-0.01, -0.2, -0.05]} />
+      <primitive object={scene} scale={0.58} position={[0, -1.02, -0.48]} rotation={[-0.02, -0.16, -0.03]} />
     </group>
   );
 }
@@ -115,7 +132,7 @@ function FitCanvas() {
 export default function HeroCanvas() {
   return (
     <Canvas
-      camera={{ position: [22, 2.4, 6.2], fov: 32 }}
+      camera={{ position: [18, 2.15, 5.1], fov: 30 }}
       dpr={[1, 1.5]}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
     >

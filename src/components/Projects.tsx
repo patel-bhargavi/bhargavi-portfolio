@@ -1,7 +1,5 @@
-import { useRef, type MouseEvent } from "react";
 import { ExternalLink, Github } from "lucide-react";
 import { profile, projects, type Project } from "@/data/portfolio";
-import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import ProjectVisual from "./ProjectVisual";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
@@ -29,7 +27,7 @@ export default function Projects() {
             href={profile.github}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-medium text-violet-200 underline-offset-4 hover:underline"
+            className="hover-btn inline-flex items-center gap-2 text-sm font-medium text-violet-200 underline-offset-4 hover:underline"
           >
             <Github size={16} />
             More on GitHub
@@ -41,29 +39,8 @@ export default function Projects() {
 }
 
 function ProjectCard({ project }: { project: Project }) {
-  const cardRef = useRef<HTMLElement>(null);
-  const reduced = usePrefersReducedMotion();
-
-  const onMove = (event: MouseEvent<HTMLElement>) => {
-    if (reduced || !cardRef.current) return;
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    cardRef.current.style.transform = `perspective(1000px) rotateX(${(-y * 5).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg) translateY(-4px)`;
-  };
-
-  const onLeave = () => {
-    if (cardRef.current) cardRef.current.style.transform = "";
-  };
-
   return (
-    <article
-      ref={cardRef}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      className="group flex h-full flex-col rounded-[28px] border border-white/10 bg-white/[0.03] p-4 transition-transform duration-200 will-change-transform sm:p-5"
-    >
+    <article className="hover-card group flex h-full flex-col rounded-[28px] border border-white/10 bg-white/[0.03] p-4 sm:p-5">
       <ProjectVisual id={project.id} accent={project.accent} />
       <div className="flex flex-1 flex-col px-1 pb-1 pt-5">
         <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">{project.category}</p>
@@ -94,7 +71,7 @@ function ProjectCard({ project }: { project: Project }) {
               href={project.live}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-2 text-xs font-medium text-zinc-950"
+              className="hover-btn inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-2 text-xs font-medium text-zinc-950"
             >
               Live demo
               <ExternalLink size={13} />
@@ -109,7 +86,7 @@ function ProjectCard({ project }: { project: Project }) {
               href={project.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-2 text-xs font-medium text-white"
+              className="hover-btn inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-2 text-xs font-medium text-white"
             >
               <Github size={13} />
               Source

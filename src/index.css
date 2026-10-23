@@ -59,6 +59,46 @@
   }
 }
 
+@layer utilities {
+  .hover-card,
+  .hover-btn {
+    transition:
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.45s ease,
+      background-color 0.45s ease,
+      box-shadow 0.45s ease,
+      color 0.45s ease;
+  }
+
+  .hover-btn svg {
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hover-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+  }
+
+  .hover-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(109, 40, 217, 0.22);
+  }
+
+  .hover-btn:hover svg {
+    transform: translate(2px, -2px);
+  }
+
+  .hover-btn.icon-quiet:hover svg,
+  .hover-btn:disabled:hover,
+  .hover-btn:disabled:hover svg {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
 @keyframes float-device {
   0%,
   100% {

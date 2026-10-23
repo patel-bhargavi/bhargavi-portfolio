@@ -2,7 +2,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDownRight, Github, Linkedin, Mail } from "lucide-react";
 import { profile } from "@/data/portfolio";
 import { useCanRender3D } from "@/hooks/useCanRender3D";
-import { mailtoHref } from "@/lib/contact";
 import HeroFallback from "./hero/HeroFallback";
 
 const social = [
@@ -61,10 +60,11 @@ export default function Hero() {
               Explore My Work
             </a>
             <a
-              href={mailtoHref({ subject: "Resume request", message: "Hello Bhargavi, please send your resume." })}
+              href={profile.resume}
+              download="Bhargavi Patel Resume.pdf"
               className="hover-btn inline-flex items-center rounded-full px-4 py-3 text-sm font-medium text-zinc-300 underline-offset-4 hover:text-white hover:underline"
             >
-              Request Resume
+              Download Resume
             </a>
           </motion.div>
           <motion.div variants={item} className="mt-8 flex items-center gap-3">

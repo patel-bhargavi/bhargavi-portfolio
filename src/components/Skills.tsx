@@ -76,7 +76,7 @@ export default function Skills() {
                 <h3 className="font-display text-2xl text-white">{active.label}</h3>
                 <p className="mt-2 max-w-xl text-sm leading-relaxed text-zinc-400">{active.summary}</p>
               </div>
-              <Constellation activeIndex={skillGroups.findIndex((group) => group.id === active.id)} />
+              <Constellation activeIndex={skillGroups.findIndex((group) => group.id === active.id)} count={skillGroups.length} />
             </div>
             <ul className="grid gap-3 sm:grid-cols-2">
               {active.items.map((item) => (
@@ -98,20 +98,28 @@ export default function Skills() {
   );
 }
 
-function Constellation({ activeIndex }: { activeIndex: number }) {
-  const nodes = [
-    { cx: 28, cy: 58 },
-    { cx: 78, cy: 28 },
-    { cx: 124, cy: 70 },
-    { cx: 86, cy: 108 },
-  ];
+function Constellation({ activeIndex, count }: { activeIndex: number; count: number }) {
+  const nodes = Array.from({ length: count }, (_, index) => {
+    const angle = (Math.PI * 2 * index) / count - Math.PI / 2;
+    return { cx: 75 + Math.cos(angle) * 46, cy: 65 + Math.sin(angle) * 46 };
+  });
 
   return (
     <svg viewBox="0 0 150 130" className="hidden h-28 w-32 shrink-0 sm:block" aria-hidden="true">
-      <line x1="28" y1="58" x2="78" y2="28" stroke="rgba(196,181,253,0.45)" strokeWidth="1" />
-      <line x1="78" y1="28" x2="124" y2="70" stroke="rgba(125,211,252,0.45)" strokeWidth="1" />
-      <line x1="124" y1="70" x2="86" y2="108" stroke="rgba(196,181,253,0.35)" strokeWidth="1" />
-      <line x1="86" y1="108" x2="28" y2="58" stroke="rgba(125,211,252,0.35)" strokeWidth="1" />
+      {nodes.map((node, index) => {
+        const next = nodes[(index + 1) % nodes.length];
+        return (
+          <line
+            key={index}
+            x1={node.cx}
+            y1={node.cy}
+            x2={next.cx}
+            y2={next.cy}
+            stroke={index % 2 === 0 ? "rgba(196,181,253,0.45)" : "rgba(125,211,252,0.4)"}
+            strokeWidth="1"
+          />
+        );
+      })}
       {nodes.map((node, index) => (
         <circle
           key={index}

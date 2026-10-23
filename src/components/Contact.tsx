@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { profile } from "@/data/portfolio";
-import { mailtoHref, submitContact, type ContactPayload } from "@/lib/contact";
+import { submitContact, type ContactPayload } from "@/lib/contact";
 import Reveal from "./Reveal";
 
 const schema = z.object({
@@ -87,10 +87,11 @@ export default function Contact() {
             <ContactLink icon={Github} label="GitHub" value="patel-bhargavi" href={profile.github} external />
             <ContactLink icon={Linkedin} label="LinkedIn" value="Bhargavi Patel" href={profile.linkedin} external />
             <a
-              href={mailtoHref({ subject: "Resume request", message: "Hello Bhargavi, please send your resume." })}
+              href={profile.resume}
+              download="Bhargavi Patel Resume.pdf"
               className="hover-btn inline-flex pt-2 text-sm font-medium text-violet-200 underline-offset-4 hover:underline"
             >
-              Request resume by email
+              Download resume
             </a>
           </Reveal>
 

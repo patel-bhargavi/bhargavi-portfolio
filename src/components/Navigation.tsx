@@ -1,79 +1,123 @@
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { navItems, profile } from "@/data/portfolio";
+import { useActiveSection } from "@/hooks/useActiveSection";
 
-import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+const sectionIds = ["home", ...navItems.map((item) => item.id)] as const;
 
-const Navigation = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+export default function Navigation() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const active = useActiveSection(sectionIds);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Education', href: '#education' },
-    { name: 'Contact', href: '#contact' }
-  ];
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/80 backdrop-blur-lg border-b border-gray-800' : 'bg-transparent'
-      }`}>
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex justify-between items-center">
-          <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Bhargavi Patel
+    <header className="fixed inset-x-0 top-0 z-50">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-zinc-950"
+      >
+        Skip to content
+      </a>
+      <nav
+        aria-label="Primary"
+        className={`border-b transition-colors duration-300 ${
+          scrolled || open ? "border-white/10 bg-zinc-950/80 backdrop-blur-xl" : "border-transparent bg-transparent"
+        }`}
+      >
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6">
+          <a href="#home" className="flex items-center gap-2.5 text-sm font-medium text-white">
+            <span className="grid h-8 w-8 place-items-center rounded-full border border-white/15 bg-white/5 font-display text-xs tracking-wide text-violet-200">
+              BP
+            </span>
+            <span className="hidden sm:inline">{profile.name}</span>
+          </a>
+
+          <div className="hidden items-center gap-1 lg:flex">
+            {navItems.map((item) => {
+              const current = active === item.id;
+              return (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  aria-current={current ? "true" : undefined}
+                  className={`relative rounded-full px-3 py-1.5 text-sm transition-colors ${
+                    current ? "text-white" : "text-zinc-400 hover:text-white"
+                  }`}
+                >
+                  {current ? <span className="absolute inset-0 rounded-full bg-white/10" /> : null}
+                  <span className="relative">{item.label}</span>
+                </a>
+              );
+            })}
           </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-gray-300 hover:text-white transition-colors duration-300 relative group"
-              >
-                {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
+          <div className="flex items-center gap-2">
+            <a
+              href="#contact"
+              className="hidden rounded-full bg-white px-4 py-2 text-sm font-medium text-zinc-950 transition hover:bg-violet-100 sm:inline-flex"
+            >
+              Let’s Work Together
+            </a>
+            <button
+              type="button"
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-white lg:hidden"
+              aria-expanded={open}
+              aria-controls="mobile-nav"
+              onClick={() => setOpen((value) => !value)}
+            >
+              <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
+              {open ? <X size={18} /> : <Menu size={18} />}
+            </button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-white p-2"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-gray-800">
-            {navItems.map((item) => (
+        {open ? (
+          <div id="mobile-nav" className="border-t border-white/10 px-5 py-4 lg:hidden">
+            <div className="flex flex-col">
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-white/5 py-3 text-base text-zinc-200"
+                >
+                  {item.label}
+                </a>
+              ))}
               <a
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-2 text-gray-300 hover:text-white transition-colors duration-300"
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="mt-4 inline-flex justify-center rounded-full bg-white px-4 py-3 text-sm font-medium text-zinc-950"
               >
-                {item.name}
+                Let’s Work Together
               </a>
-            ))}
+            </div>
           </div>
-        )}
-      </div>
-    </nav>
+        ) : null}
+      </nav>
+    </header>
   );
-};
-
-export default Navigation;
+}

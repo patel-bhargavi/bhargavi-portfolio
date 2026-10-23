@@ -1,322 +1,76 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+    --card: 240 8% 7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 4%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 262 83% 66%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 6% 14%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 6% 14%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 240 6% 14%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5% 18%;
+    --input: 240 5% 18%;
+    --ring: 262 83% 66%;
+    --radius: 0.75rem;
+    --sidebar-background: 240 6% 8%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 262 83% 58%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 240 5% 14%;
+    --sidebar-accent-foreground: 0 0% 96%;
+    --sidebar-border: 240 5% 16%;
+    --sidebar-ring: 262 83% 66%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  }
-
   html {
     scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-[#09090b] text-foreground antialiased;
+    font-family: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: rgba(139, 92, 246, 0.35);
+    color: white;
+  }
+
+  :focus-visible {
+    outline: 2px solid #c4b5fd;
+    outline-offset: 3px;
   }
 }
 
-@layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
+@keyframes float-device {
+  0%,
+  100% {
+    transform: translateY(0);
   }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.6s ease-out forwards;
-  }
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(50px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-scale-in {
-    animation: scaleIn 0.5s ease-out forwards;
-  }
-
-  @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
-  }
-
-  @keyframes glow {
-    from {
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-    }
-    to {
-      box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
-    }
-  }
-
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px) rotate(45deg);
-    }
-    50% {
-      transform: translateY(-10px) rotate(45deg);
-    }
-  }
-
-  .animate-pulse-slow {
-    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  /* Laptop Animations */
-  .animate-laptop-float {
-    animation: laptopFloat 4s ease-in-out infinite;
-  }
-
-  @keyframes laptopFloat {
-    0%, 100% {
-      transform: translateY(0px) rotateX(5deg) rotateY(-5deg);
-    }
-    50% {
-      transform: translateY(-20px) rotateX(10deg) rotateY(5deg);
-    }
-  }
-
-  .animate-screen-glow {
-    animation: screenGlow 3s ease-in-out infinite alternate;
-  }
-
-  @keyframes screenGlow {
-    from {
-      box-shadow: 0 0 20px rgba(34, 197, 94, 0.3), inset 0 0 20px rgba(34, 197, 94, 0.1);
-    }
-    to {
-      box-shadow: 0 0 40px rgba(34, 197, 94, 0.6), inset 0 0 30px rgba(34, 197, 94, 0.2);
-    }
-  }
-
-  .animate-code-line {
-    animation: codeLine 4s ease-in-out infinite;
-    opacity: 0;
-  }
-
-  @keyframes codeLine {
-    0%, 90%, 100% {
-      opacity: 0;
-      transform: translateX(-10px);
-    }
-    10%, 80% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  .animate-cursor-blink {
-    animation: cursorBlink 1s step-end infinite;
-  }
-
-  @keyframes cursorBlink {
-    0%, 50% {
-      opacity: 1;
-    }
-    51%, 100% {
-      opacity: 0;
-    }
-  }
-
-  .animate-key-press {
-    animation: keyPress 3s ease-in-out infinite;
-  }
-
-  @keyframes keyPress {
-    0%, 95%, 100% {
-      background-color: rgb(75, 85, 99);
-      transform: scale(1);
-    }
-    2%, 4% {
-      background-color: rgb(59, 130, 246);
-      transform: scale(0.95);
-    }
-  }
-
-  .animate-float-code {
-    animation: floatCode 3s ease-in-out infinite;
-  }
-
-  @keyframes floatCode {
-    0%, 100% {
-      transform: translateY(0px) rotate(0deg);
-      opacity: 0.8;
-    }
-    50% {
-      transform: translateY(-15px) rotate(5deg);
-      opacity: 1;
-    }
-  }
-
-  .animate-binary-stream {
-    animation: binaryStream 2s linear infinite;
-  }
-
-  @keyframes binaryStream {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    50% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-  }
-
-  .animate-orbit-laptop {
-    animation: orbitLaptop 6s linear infinite;
-  }
-
-  @keyframes orbitLaptop {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  .animate-typing {
-    animation: typing 4s steps(40, end) infinite;
-  }
-
-  @keyframes typing {
-    0%, 90%, 100% {
-      width: 0;
-    }
-    10%, 80% {
-      width: 100%;
-    }
-  }
-
-  .text-shadow {
-    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-  }
-
-  .backdrop-blur-glass {
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-
-  .transform-gpu {
-    transform: translateZ(0);
+  50% {
+    transform: translateY(-10px);
   }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #1a1a1a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #2563eb, #7c3aed);
-}
-
-/* Smooth scrolling for all browsers */
-* {
-  scroll-behavior: smooth;
-}
-
-/* Selection color */
-::selection {
-  background: rgba(59, 130, 246, 0.3);
-  color: white;
-}
-
-/* Focus styles */
-:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

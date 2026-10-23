@@ -64,3 +64,17 @@ For Vercel:
 1. Connect your GitHub repository
 2. Configure build settings
 3. Deploy and get a live URL
+
+## Contact form
+
+The form validates in the browser. Without extra configuration it opens the visitor’s email app with a draft to `patelbhargavi1624@gmail.com`. It does not pretend the message was delivered.
+
+To send the form to a hosted inbox instead, set this environment variable in Vercel (or a local `.env` file, which should not be committed):
+
+```sh
+VITE_CONTACT_ENDPOINT=https://formspree.io/f/your-form-id
+```
+
+The endpoint must accept a JSON `POST` with `name`, `email`, `subject`, and `message`, and return a successful HTTP status. Do not put API keys in frontend code. If the service needs a secret, keep it on a server or in the provider’s form settings.
+
+There is no resume file in this repository. The resume actions open an email request. Add a file such as `public/resume.pdf` later if you want a direct download.

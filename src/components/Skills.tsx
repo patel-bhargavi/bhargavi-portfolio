@@ -1,88 +1,126 @@
+import { useState, type KeyboardEvent } from "react";
+import { skillGroups, type SkillDepth } from "@/data/portfolio";
+import Reveal from "./Reveal";
+import SectionHeader from "./SectionHeader";
 
-import React, { useRef, useEffect, useState } from 'react';
+const depthTone: Record<SkillDepth, string> = {
+  "Professional experience": "border-violet-300/30 bg-violet-400/10 text-violet-100",
+  "Project work": "border-sky-300/30 bg-sky-400/10 text-sky-100",
+  "Working knowledge": "border-cyan-200/25 bg-cyan-300/10 text-cyan-50",
+};
 
-const Skills = () => {
-  const skillsRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+export default function Skills() {
+  const [activeId, setActiveId] = useState(skillGroups[0].id);
+  const active = skillGroups.find((group) => group.id === activeId) ?? skillGroups[0];
 
-  const skills = [
-    { name: 'React.js', level: 90, color: 'from-blue-500 to-cyan-500' },
-    { name: 'Node.js', level: 80, color: 'from-green-500 to-emerald-500' },
-    { name: 'Express', level: 75, color: 'from-rose-500 to-pink-400' },
-    { name: 'PostgreSQL', level: 70, color: 'from-sky-600 to-sky-400' },
-    { name: 'Next.js', level: 80, color: 'from-violet-600 to-violet-400' },
-    { name: 'Vue.js', level: 65, color: 'from-cyan-500 to-blue-400' },
-    { name: 'TypeScript', level: 85, color: 'from-blue-600 to-blue-400' },
-    { name: 'JavaScript', level: 90, color: 'from-yellow-500 to-orange-500' },
-    { name: 'MySQL', level: 75, color: 'from-orange-600 to-yellow-500' },
-    { name: 'HTML/CSS', level: 95, color: 'from-orange-500 to-red-500' }
-  ];
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    if (skillsRef.current) {
-      observer.observe(skillsRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    const index = skillGroups.findIndex((group) => group.id === activeId);
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft" && event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+    event.preventDefault();
+    const direction = event.key === "ArrowRight" || event.key === "ArrowDown" ? 1 : -1;
+    const next = skillGroups[(index + direction + skillGroups.length) % skillGroups.length];
+    setActiveId(next.id);
+    document.getElementById(`skill-tab-${next.id}`)?.focus();
+  };
 
   return (
-    <section id="skills" className="py-20 px-6 bg-gray-900/50">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Skills & Expertise
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-8"></div>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            A comprehensive set of technical skills acquired through hands-on experience and continuous learning
-          </p>
-        </div>
+    <section id="skills" className="scroll-mt-24 px-5 py-24 sm:px-6">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeader
+          eyebrow="Capabilities"
+          title="Skills, labeled by how I actually use them."
+          description="Professional work, shipped project work, and working knowledge stay separate. There are no proficiency percentages."
+        />
 
-        <div ref={skillsRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skills.map((skill, index) => (
-            <div
-              key={skill.name}
-              className="p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl hover:shadow-gray-900/50"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-white">{skill.name}</h3>
-                <span className="text-gray-400 text-sm">{skill.level}%</span>
-              </div>
-
-              <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-                <div
-                  className={`h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-1000 ease-out relative`}
-                  style={{
-                    width: isVisible ? `${skill.level}%` : '0%',
-                    transitionDelay: `${index * 100}ms`
-                  }}
+        <Reveal className="mt-12 grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
+          <div
+            role="tablist"
+            aria-label="Skill groups"
+            aria-orientation="vertical"
+            onKeyDown={onKeyDown}
+            className="flex gap-2 overflow-x-auto lg:flex-col lg:overflow-visible"
+          >
+            {skillGroups.map((group) => {
+              const selected = group.id === active.id;
+              return (
+                <button
+                  key={group.id}
+                  id={`skill-tab-${group.id}`}
+                  role="tab"
+                  type="button"
+                  aria-selected={selected}
+                  aria-controls={`skill-panel-${group.id}`}
+                  tabIndex={selected ? 0 : -1}
+                  onClick={() => setActiveId(group.id)}
+                  className={`min-w-fit rounded-2xl border px-4 py-3 text-left text-sm transition lg:w-full ${
+                    selected
+                      ? "border-violet-300/40 bg-violet-400/10 text-white"
+                      : "border-white/10 bg-white/[0.03] text-zinc-400 hover:text-white"
+                  }`}
                 >
-                  <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
-                </div>
-              </div>
+                  <span className="block font-medium">{group.label}</span>
+                  <span className="mt-1 block text-xs text-zinc-500">{group.items.length} areas</span>
+                </button>
+              );
+            })}
+          </div>
 
-              <div className="mt-4 flex justify-center">
-                <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${skill.color} animate-pulse`}></div>
+          <div
+            role="tabpanel"
+            id={`skill-panel-${active.id}`}
+            aria-labelledby={`skill-tab-${active.id}`}
+            className="rounded-[28px] border border-white/10 bg-zinc-950/60 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] sm:p-7"
+          >
+            <div className="mb-6 flex items-start justify-between gap-4">
+              <div>
+                <h3 className="font-display text-2xl text-white">{active.label}</h3>
+                <p className="mt-2 max-w-xl text-sm leading-relaxed text-zinc-400">{active.summary}</p>
               </div>
+              <Constellation activeIndex={skillGroups.findIndex((group) => group.id === active.id)} />
             </div>
-          ))}
-        </div>
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {active.items.map((item) => (
+                <li key={item.name} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h4 className="font-medium text-white">{item.name}</h4>
+                    <span className={`rounded-full border px-2.5 py-1 text-[11px] tracking-wide ${depthTone[item.depth]}`}>
+                      {item.depth}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-400">{item.note}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
-};
+}
 
-export default Skills;
+function Constellation({ activeIndex }: { activeIndex: number }) {
+  const nodes = [
+    { cx: 28, cy: 58 },
+    { cx: 78, cy: 28 },
+    { cx: 124, cy: 70 },
+    { cx: 86, cy: 108 },
+  ];
+
+  return (
+    <svg viewBox="0 0 150 130" className="hidden h-28 w-32 shrink-0 sm:block" aria-hidden="true">
+      <line x1="28" y1="58" x2="78" y2="28" stroke="rgba(196,181,253,0.45)" strokeWidth="1" />
+      <line x1="78" y1="28" x2="124" y2="70" stroke="rgba(125,211,252,0.45)" strokeWidth="1" />
+      <line x1="124" y1="70" x2="86" y2="108" stroke="rgba(196,181,253,0.35)" strokeWidth="1" />
+      <line x1="86" y1="108" x2="28" y2="58" stroke="rgba(125,211,252,0.35)" strokeWidth="1" />
+      {nodes.map((node, index) => (
+        <circle
+          key={index}
+          cx={node.cx}
+          cy={node.cy}
+          r={index === activeIndex ? 7 : 4}
+          fill={index === activeIndex ? "#c4b5fd" : "rgba(255,255,255,0.35)"}
+        />
+      ))}
+    </svg>
+  );
+}

@@ -1,154 +1,122 @@
+import { useRef, type MouseEvent } from "react";
+import { ExternalLink, Github } from "lucide-react";
+import { profile, projects, type Project } from "@/data/portfolio";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import ProjectVisual from "./ProjectVisual";
+import Reveal from "./Reveal";
+import SectionHeader from "./SectionHeader";
 
-import React, { useRef, useEffect } from 'react';
-import { ExternalLink, Github, Code, Database, Palette } from 'lucide-react';
-
-const Projects = () => {
-  const projectsRef = useRef<HTMLDivElement>(null);
-
-  const projects = [
-    {
-      title: "HRM & Task Management",
-      description: "A comprehensive tracking app developed by designing key UI features based on Figma designs. Built a clean and responsive business theme using React, TypeScript, Tailwind CSS, and Bootstrap to create integrated forms with React Hook Form and validation. Implemented secure user authentication and utilized intelligent system design for optimal performance.",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "React Hook Form", "Authentication"],
-      icon: Database,
-      gradient: "from-blue-500 to-cyan-500"
-    },
-    {
-      title: "360 View AI – 3D Model Viewer with Google AR",
-      description: "Built an interactive 3D model viewer application that leverages Google's AR Core for immersive augmented reality experiences. Features include 360-degree product visualization, interactive model rotation, and real-time AR preview. Implemented using React with Three.js integration for smooth 3D rendering and performance optimization. Users can view products in their own environment using AR modal, enhancing the online shopping and product showcase experience.",
-      technologies: ["React", "Three.js", "Google AR Core", "WebGL", "3D Visualization"],
-      icon: Palette,
-      gradient: "from-purple-500 to-pink-500",
-      link: "https://react-ar-3dmodel-viewer.vercel.app/",
-      github: "https://github.com/patel-bhargavi/react-ar-model-viewer"
-    },
-    {
-      title: "React 360 Panorama View",
-      description: "Developed a panoramic 360-degree image viewer using React with advanced visualization capabilities. The application provides seamless panoramic viewing experience with mouse and touch controls, allowing users to explore immersive 360 environments. Integrated with visualizer tools for professional product showcase and virtual tours. Perfect for real estate, tourism, and product visualization applications.",
-      technologies: ["React", "Three.js", "Panorama Viewer", "Touch Controls", "WebGL"],
-      icon: Code,
-      gradient: "from-cyan-500 to-blue-500",
-      link: "https://react-360view-panorama.vercel.app/",
-      github: "https://github.com/patel-bhargavi/react-360-panorama"
-    },
-    {
-      title: "Catloga – Digital Tile Catalogue Maker",
-      description: "Developed a digital tile catalogue platform that enables businesses to easily create, manage, and showcase their tile collections online. Designed an intuitive and visually appealing user interface using React and Tailwind CSS, allowing users to upload product images, organize tiles by categories, and generate interactive digital catalogues. Integrated secure authentication and efficient data management for seamless user experience. This project streamlined the process of presenting and sharing tile collections with clients, enhancing business visibility and customer engagement.",
-      technologies: ["React", "Tailwind CSS", "Authentication", "UI/UX Design", "React Query"],
-      icon: Database,
-      gradient: "from-green-500 to-emerald-500"
-    }
-  ];
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (projectsRef.current) {
-      observer.observe(projectsRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
+export default function Projects() {
   return (
-    <section id="projects" className="py-20 px-6 bg-gray-900/50">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Featured Projects
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-8"></div>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Showcase of my recent work and development projects
-          </p>
-        </div>
+    <section id="projects" className="scroll-mt-24 px-5 py-24 sm:px-6">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeader
+          eyebrow="Selected work"
+          title="Projects with a real problem behind them."
+          description="Live demos are linked where they exist. Source is shown only for the public GitHub repositories."
+        />
 
-        <div ref={projectsRef} className="grid md:grid-cols-2 gap-8">
+        <div className="mt-12 grid gap-5 lg:grid-cols-2">
           {projects.map((project, index) => (
-            <div
-              key={index}
-              className="group relative bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-gray-600 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-gray-900/50"
-              style={{ animationDelay: `${index * 200}ms` }}
-            >
-              {/* Gradient overlay */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-
-              <div className="relative p-8">
-                <div className="flex items-start justify-between mb-6">
-                  <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                    <project.icon size={32} className="text-white" />
-                  </div>
-                  <div className="flex space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative z-20 pointer-events-auto">
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-300 cursor-pointer hover:scale-110 transform"
-                      >
-                        <Github size={20} className="text-white hover:text-blue-400" />
-                      </a>
-                    )}
-                    {project.link && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-300 cursor-pointer hover:scale-110 transform"
-                      >
-                        <ExternalLink size={20} className="text-white hover:text-blue-400" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-500 group-hover:bg-clip-text transition-all duration-300">
-                  {project.title}
-                </h3>
-
-                <p className="text-gray-300 leading-relaxed mb-6 group-hover:text-gray-200 transition-colors duration-300">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 bg-gray-700/50 text-gray-300 rounded-full text-sm border border-gray-600 group-hover:border-gray-500 group-hover:bg-gray-600/50 transition-all duration-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Animated border */}
-                <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-500 transition-all duration-500"></div>
-              </div>
-            </div>
+            <Reveal key={project.id} delay={index * 0.05}>
+              <ProjectCard project={project} />
+            </Reveal>
           ))}
         </div>
-        <div className="text-center mt-12">
+
+        <div className="mt-8">
           <a
-            href="https://github.com/patel-bhargavi"
+            href={profile.github}
             target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/25"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-medium text-violet-200 underline-offset-4 hover:underline"
           >
-            View All Projects
+            <Github size={16} />
+            More on GitHub
           </a>
         </div>
       </div>
     </section>
   );
-};
+}
 
-export default Projects;
+function ProjectCard({ project }: { project: Project }) {
+  const cardRef = useRef<HTMLElement>(null);
+  const reduced = usePrefersReducedMotion();
+
+  const onMove = (event: MouseEvent<HTMLElement>) => {
+    if (reduced || !cardRef.current) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    cardRef.current.style.transform = `perspective(1000px) rotateX(${(-y * 5).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg) translateY(-4px)`;
+  };
+
+  const onLeave = () => {
+    if (cardRef.current) cardRef.current.style.transform = "";
+  };
+
+  return (
+    <article
+      ref={cardRef}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      className="group flex h-full flex-col rounded-[28px] border border-white/10 bg-white/[0.03] p-4 transition-transform duration-200 will-change-transform sm:p-5"
+    >
+      <ProjectVisual id={project.id} accent={project.accent} />
+      <div className="flex flex-1 flex-col px-1 pb-1 pt-5">
+        <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">{project.category}</p>
+        <h3 className="mt-2 font-display text-2xl text-white">{project.title}</h3>
+        <p className="mt-3 text-sm leading-relaxed text-zinc-300">
+          <span className="text-zinc-500">Problem. </span>
+          {project.problem}
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-zinc-400">{project.contribution}</p>
+        <ul className="mt-4 space-y-1.5 text-sm text-zinc-400">
+          {project.features.map((feature) => (
+            <li key={feature} className="flex gap-2">
+              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-violet-300" />
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+        <ul className="mt-5 flex flex-wrap gap-2">
+          {project.technologies.map((tech) => (
+            <li key={tech} className="rounded-full border border-white/10 px-2.5 py-1 text-xs text-zinc-300">
+              {tech}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-5 flex flex-wrap gap-3">
+          {project.live ? (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-2 text-xs font-medium text-zinc-950"
+            >
+              Live demo
+              <ExternalLink size={13} />
+            </a>
+          ) : (
+            <span className="inline-flex items-center rounded-full border border-white/10 px-3.5 py-2 text-xs text-zinc-500">
+              No public demo
+            </span>
+          )}
+          {project.github ? (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-2 text-xs font-medium text-white"
+            >
+              <Github size={13} />
+              Source
+            </a>
+          ) : null}
+        </div>
+      </div>
+    </article>
+  );
+}

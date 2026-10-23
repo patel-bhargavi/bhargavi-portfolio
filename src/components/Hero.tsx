@@ -1,218 +1,98 @@
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDownRight, Github, Linkedin, Mail } from "lucide-react";
+import { profile } from "@/data/portfolio";
+import { useCanRender3D } from "@/hooks/useCanRender3D";
+import { mailtoHref } from "@/lib/contact";
+import HeroFallback from "./hero/HeroFallback";
 
-import React, { useEffect, useRef, useState } from 'react';
-import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
+const social = [
+  { href: profile.github, label: "GitHub", icon: Github },
+  { href: profile.linkedin, label: "LinkedIn", icon: Linkedin },
+  { href: `mailto:${profile.email}`, label: "Email", icon: Mail },
+];
 
-const Hero = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const laptopRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (heroRef.current) {
-      observer.observe(heroRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!laptopRef.current) return;
-
-    const rect = laptopRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    const rotateX = (e.clientY - centerY) / 10;
-    const rotateY = (e.clientX - centerX) / 10;
-
-    setMousePosition({ x: rotateY, y: -rotateX });
+export default function Hero() {
+  const reduced = useReducedMotion();
+  const canRender = useCanRender3D();
+  const container = {
+    hidden: {},
+    show: { transition: { staggerChildren: reduced ? 0 : 0.08, delayChildren: reduced ? 0 : 0.05 } },
   };
-
-  const handleMouseLeave = () => {
-    setIsHovering(false);
-    setMousePosition({ x: 0, y: 0 });
-  };
-
-  const handleMouseEnter = () => {
-    setIsHovering(true);
+  const item = {
+    hidden: { opacity: reduced ? 1 : 0, y: reduced ? 0 : 16 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-      {/* Animated background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-32 h-32 bg-blue-500/20 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-48 h-48 bg-purple-500/20 rounded-full blur-xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-2xl animate-spin" style={{ animationDuration: '20s' }}></div>
-      </div>
+    <section id="home" className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(109,40,217,0.18),transparent_42%),radial-gradient(ellipse_at_bottom_right,rgba(37,99,235,0.12),transparent_36%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
 
-      <div ref={heroRef} className="text-center z-10 px-6 max-w-7xl mx-auto">
-        {/* Main content with 3D laptop animation beside name */}
-        <div className="flex items-center justify-center flex-col lg:flex-row gap-12 lg:gap-20 mb-8">
-          {/* Name Section */}
-          <div className="flex-1 lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-fade-in">
-              Bhargavi Patel
-            </h1>
-            <p className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-4 animate-fade-in delay-300">
-              Full Stack Developer
-            </p>
-          </div>
-
-          {/* 3D Interactive Developer Laptop Animation */}
-          <div className="flex-shrink-0">
-            <div
-              ref={laptopRef}
-              className="w-80 h-80 relative perspective-1000 cursor-pointer"
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              onMouseEnter={handleMouseEnter}
+      <div className="mx-auto grid min-h-[100svh] max-w-6xl items-center gap-8 px-5 pb-16 pt-28 sm:px-6 lg:grid-cols-2 lg:pt-24">
+        <motion.div variants={container} initial="hidden" animate="show" className="relative z-10 min-w-0">
+          <motion.p variants={item} className="mb-5 text-xs font-medium uppercase tracking-[0.22em] text-zinc-400">
+            {profile.location}
+          </motion.p>
+          <motion.h1 variants={item} className="font-display text-[3.25rem] font-semibold leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-[4.5rem]">
+            {profile.name}
+          </motion.h1>
+          <motion.p variants={item} className="mt-5 text-lg font-medium text-zinc-100 sm:text-xl">
+            {profile.role}
+            <span className="text-zinc-500"> · </span>
+            <span className="bg-gradient-to-r from-violet-300 via-blue-300 to-cyan-200 bg-clip-text text-transparent">
+              {profile.positioning}
+            </span>
+          </motion.p>
+          <motion.p variants={item} className="mt-5 max-w-lg text-base leading-relaxed text-zinc-400 sm:text-lg">
+            I build web applications with clear interfaces, Node.js services, and data models that stay understandable as a product grows.
+          </motion.p>
+          <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full bg-violet-500 px-5 py-3 text-sm font-medium text-white shadow-[0_10px_40px_rgba(109,40,217,0.35)] transition hover:bg-violet-400"
             >
-              {/* Laptop Base with 3D interaction */}
-              <div
-                className={`absolute inset-0 transition-transform duration-300 ease-out ${isHovering ? '' : 'animate-laptop-float'
-                  }`}
-                style={{
-                  transform: isHovering
-                    ? `rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg) translateZ(0)`
-                    : undefined
-                }}
+              Let’s Work Together
+              <ArrowDownRight size={16} />
+            </a>
+            <a
+              href="#projects"
+              className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/10"
+            >
+              Explore My Work
+            </a>
+            <a
+              href={mailtoHref({ subject: "Resume request", message: "Hello Bhargavi, please send your resume." })}
+              className="inline-flex items-center rounded-full px-4 py-3 text-sm font-medium text-zinc-300 underline-offset-4 transition hover:text-white hover:underline"
+            >
+              Request Resume
+            </a>
+          </motion.div>
+          <motion.div variants={item} className="mt-8 flex items-center gap-3">
+            {social.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                aria-label={link.label}
+                className="grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/5 text-zinc-200 transition hover:border-violet-300/40 hover:text-white"
               >
-                {/* Laptop Screen */}
-                <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-48 h-32 bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-t-lg border-2 border-gray-600 animate-screen-glow">
-                  {/* Screen Content - Code Animation */}
-                  <div className="p-3 h-full overflow-hidden relative">
-                    <div className="text-xs font-mono text-green-400 animate-typing">
-                      <div className="animate-code-line" style={{ animationDelay: '0s' }}>{'<div className="hero">'}</div>
-                      <div className="animate-code-line" style={{ animationDelay: '0.5s' }}>{'  <h1>Hello World</h1>'}</div>
-                      <div className="animate-code-line" style={{ animationDelay: '1s' }}>{'  <p>Developer</p>'}</div>
-                      <div className="animate-code-line" style={{ animationDelay: '1.5s' }}>{'</div>'}</div>
-                    </div>
-                    {/* Cursor Blink */}
-                    <div className="absolute bottom-3 left-3 w-1 h-4 bg-green-400 animate-cursor-blink"></div>
-                  </div>
-                </div>
+                <link.icon size={18} />
+              </a>
+            ))}
+          </motion.div>
+        </motion.div>
 
-                {/* Laptop Keyboard */}
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-52 h-20 bg-gradient-to-b from-gray-700 to-gray-800 rounded-b-lg border-2 border-gray-600">
-                  {/* Keyboard Keys */}
-                  <div className="grid grid-cols-12 gap-0.5 p-2 h-full">
-                    {Array.from({ length: 36 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className="bg-gray-600 rounded-sm animate-key-press"
-                        style={{ animationDelay: `${i * 0.1}s` }}
-                      ></div>
-                    ))}
-                  </div>
-                  {/* Trackpad */}
-                  <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-gray-600 rounded border border-gray-500"></div>
-                </div>
-
-                {/* Floating Code Elements */}
-                <div className="absolute inset-0">
-                  {/* React Icon */}
-                  <div className="absolute top-4 right-4 w-8 h-8 text-blue-400 animate-float-code" style={{ animationDelay: '0s' }}>
-                    <div className="w-full h-full border-2 border-current rounded-full relative">
-                      <div className="absolute inset-1 border border-current rounded-full"></div>
-                    </div>
-                  </div>
-
-                  {/* JavaScript Symbol */}
-                  <div className="absolute top-12 left-4 w-6 h-6 bg-yellow-400 text-black flex items-center justify-center text-xs font-bold rounded animate-float-code" style={{ animationDelay: '0.5s' }}>
-                    JS
-                  </div>
-
-                  {/* CSS Symbol */}
-                  <div className="absolute bottom-12 right-8 w-6 h-6 bg-blue-500 text-white flex items-center justify-center text-xs font-bold rounded animate-float-code" style={{ animationDelay: '1s' }}>
-                    CSS
-                  </div>
-
-                  {/* HTML Brackets */}
-                  <div className="absolute bottom-16 left-8 text-orange-400 text-lg font-mono animate-float-code" style={{ animationDelay: '1.5s' }}>
-                    {'</>'}
-                  </div>
-
-                  {/* Binary Code Stream */}
-                  <div className="absolute top-16 left-16 text-green-400 text-xs font-mono animate-binary-stream" style={{ animationDelay: '2s' }}>
-                    101010
-                  </div>
-
-                  {/* Git Branch */}
-                  <div className="absolute bottom-20 right-16 text-purple-400 text-sm animate-float-code" style={{ animationDelay: '2.5s' }}>
-                    git
-                  </div>
-                </div>
-
-                {/* Orbiting Particles */}
-                <div className={`absolute inset-0 ${isHovering ? 'animate-pulse' : 'animate-orbit-laptop'}`}>
-                  <div className="absolute top-8 left-8 w-2 h-2 bg-blue-400 rounded-full animate-pulse shadow-lg shadow-blue-400/50"></div>
-                  <div className="absolute bottom-8 right-8 w-2 h-2 bg-purple-500 rounded-full animate-pulse shadow-lg shadow-purple-500/50" style={{ animationDelay: '1s' }}></div>
-                  <div className="absolute top-20 right-12 w-2 h-2 bg-pink-500 rounded-full animate-pulse shadow-lg shadow-pink-500/50" style={{ animationDelay: '2s' }}></div>
-                </div>
-              </div>
-
-              {/* 3D Depth Shadow */}
-              <div
-                className="absolute inset-0 bg-black/20 blur-xl transform translate-y-4 translate-x-4 -z-10 transition-transform duration-300"
-                style={{
-                  transform: isHovering
-                    ? `translateY(${4 + mousePosition.y / 4}px) translateX(${4 + mousePosition.x / 4}px)`
-                    : undefined
-                }}
-              ></div>
+        <div className="relative z-10 min-w-0">
+          {canRender ? (
+            <div className="hidden h-[420px] sm:h-[480px] lg:block lg:h-[560px]" aria-hidden="true" />
+          ) : (
+            <div className="relative h-[420px] w-full sm:h-[480px] lg:h-[560px]">
+              <HeroFallback />
             </div>
-          </div>
-        </div>
-
-        <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto animate-fade-in delay-500">
-          Passionate about creating innovative, user-friendly web applications using React,
-          JavaScript, and modern web technologies. Focused on delivering high-quality solutions.
-        </p>
-
-        <div className="flex justify-center space-x-6 mb-12 animate-fade-in delay-700">
-          <a
-            href="https://github.com/patel-bhargavi"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/25"
-          >
-            <Github size={24} />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/bhargavi-patel-1016b9238/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/25"
-          >
-            <Linkedin size={24} />
-          </a>
-          <a
-            href="mailto:patelbhargavi1624@gmail.com"
-            className="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/25"
-          >
-            <Mail size={24} />
-          </a>
-        </div>
-
-        <div className="animate-bounce">
-          <ChevronDown size={32} className="mx-auto text-gray-400" />
+          )}
         </div>
       </div>
     </section>
   );
-};
-
-export default Hero;
+}

@@ -1,120 +1,66 @@
+import { Code2, Database, Layers3, Workflow } from "lucide-react";
+import Reveal from "./Reveal";
+import SectionHeader from "./SectionHeader";
 
-import React, { useRef, useEffect } from 'react';
-import { Code, Zap, Users, Target } from 'lucide-react';
+const points = [
+  {
+    icon: Layers3,
+    title: "Interfaces",
+    text: "React and Next.js screens, responsive layout, and component structure that other people can keep working in.",
+  },
+  {
+    icon: Workflow,
+    title: "APIs",
+    text: "Node.js and Express services, REST integration, and authentication between the client and the data.",
+  },
+  {
+    icon: Database,
+    title: "Data",
+    text: "PostgreSQL and MongoDB models designed with the features that read and write them.",
+  },
+  {
+    icon: Code2,
+    title: "Care in the details",
+    text: "Performance, code review, and reusable UI from product work at Sang Media and Karavya Solutions.",
+  },
+];
 
-const About = () => {
-  const aboutRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (aboutRef.current) {
-      observer.observe(aboutRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const highlights = [
-    {
-      icon: Code,
-      title: "Clean Code",
-      description: "Writing maintainable and scalable code"
-    },
-    {
-      icon: Zap,
-      title: "Performance",
-      description: "Optimizing for speed and efficiency"
-    },
-    {
-      icon: Users,
-      title: "User-Centric",
-      description: "Focusing on user experience and accessibility"
-    },
-    {
-      icon: Target,
-      title: "Goal-Oriented",
-      description: "Delivering solutions that meet business objectives"
-    }
-  ];
-
+export default function About() {
   return (
-    <section id="about" className="py-20 px-6 relative">
-      <div className="max-w-6xl mx-auto">
-        <div ref={aboutRef} className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            About Me
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-8"></div>
-        </div>
+    <section id="about" className="scroll-mt-24 px-5 py-24 sm:px-6">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeader
+          eyebrow="About"
+          title="Practical engineering across the product."
+          description="I contribute on the frontend, the API, and the database — and I keep the path between them obvious."
+        />
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <p className="text-lg text-gray-300 leading-relaxed">
-              I am a Full Stack Developer specializing in MERN and modern web frameworks. I build scalable, production-ready web applications using React, Node.js, Express, and PostgreSQL — and also work with Next.js, Vue.js, and TypeScript for modern frontend experiences.
+        <div className="mt-14 grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start">
+          <Reveal className="space-y-5 text-base leading-relaxed text-zinc-300 sm:text-lg">
+            <p>
+              I am a full-stack developer at Karavya Solutions in Ahmedabad. I build web applications with React and Next.js, Node.js and Express, and PostgreSQL and MongoDB — from the shape of a feature through deployment and maintenance.
             </p>
-            <p className="text-lg text-gray-300 leading-relaxed">
-              Experienced in API design, authentication, database integration, and deploying end-to-end solutions with a focus on performance and maintainability.
+            <p>
+              Before that I was a junior frontend developer, and earlier an intern, at Sang Media in Morbi. That work was React and Next.js, REST APIs, Redux Toolkit, TanStack Query, Tailwind CSS, and Bootstrap, plus smaller Node.js tasks and regular code reviews.
             </p>
+            <p>
+              My own project work includes InfiniteNotes, MySpace, Smart Apply, a 360 panorama viewer, and catalogue and HR interfaces with forms, validation, and authentication. The same application path — interface, API, and data — is where an AI feature belongs when it solves a real task, rather than sitting on the page as decoration.
+            </p>
+          </Reveal>
 
-            <div className="flex flex-wrap gap-4 mt-8">
-              <span className="px-4 py-2 bg-blue-500/20 text-blue-300 rounded-full text-sm border border-blue-500/30">
-                React.js
-              </span>
-              <span className="px-4 py-2 bg-green-500/20 text-green-300 rounded-full text-sm border border-green-500/30">
-                Node.js
-              </span>
-              <span className="px-4 py-2 bg-rose-500/20 text-rose-300 rounded-full text-sm border border-rose-500/30">
-                Express
-              </span>
-              <span className="px-4 py-2 bg-sky-500/20 text-sky-300 rounded-full text-sm border border-sky-500/30">
-                PostgreSQL
-              </span>
-              <span className="px-4 py-2 bg-violet-500/20 text-violet-300 rounded-full text-sm border border-violet-500/30">
-                Next.js
-              </span>
-              <span className="px-4 py-2 bg-cyan-500/20 text-cyan-300 rounded-full text-sm border border-cyan-500/30">
-                Vue.js
-              </span>
-              <span className="px-4 py-2 bg-blue-600/20 text-blue-400 rounded-full text-sm border border-blue-600/30">
-                TypeScript
-              </span>
-              <span className="px-4 py-2 bg-yellow-500/20 text-yellow-300 rounded-full text-sm border border-yellow-500/30">
-                JavaScript
-              </span>
-              <span className="px-4 py-2 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">
-                MySQL
-              </span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-6">
-            {highlights.map((item, index) => (
-              <div
-                key={index}
-                className="p-6 bg-gray-800/50 rounded-xl border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl hover:shadow-blue-500/10"
-              >
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
-                  <item.icon size={24} className="text-white" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2 text-white">{item.title}</h3>
-                <p className="text-gray-400 text-sm">{item.description}</p>
-              </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {points.map((point, index) => (
+              <Reveal key={point.title} delay={index * 0.06}>
+                <article className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
+                  <point.icon className="text-violet-300" size={20} />
+                  <h3 className="mt-4 font-display text-lg text-white">{point.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-400">{point.text}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default About;
+}

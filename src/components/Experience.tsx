@@ -1,131 +1,65 @@
+import { approach, experiences } from "@/data/portfolio";
+import Reveal from "./Reveal";
+import SectionHeader from "./SectionHeader";
 
-import React, { useRef, useEffect } from 'react';
-import { Calendar, MapPin, Building } from 'lucide-react';
-
-const Experience = () => {
-  const experienceRef = useRef<HTMLDivElement>(null);
-
-  const experiences = [
-    {
-      title: "Full Stack Developer",
-      company: "Karavya Solutions LLP - Ahmedabad",
-      period: "July 2025 - Present",
-      type: "FULL STACK DEVELOPER",
-      description:
-        "As a Full Stack Developer, I design and develop comprehensive web applications using the MERN stack and modern technologies. I build robust backend APIs with Node.js and Express, design efficient databases using PostgreSQL and MongoDB, and create responsive, interactive frontends with React and Next.js. I handle the complete development lifecycle from architecture and design to deployment and maintenance. Collaborate with cross-functional teams to deliver production-ready solutions, optimize application performance, and implement best practices for code quality and scalability.",
-      skills: ["React", "Next.js", "Node.js", "Express", "PostgreSQL", "MongoDB", "TypeScript", "API Development", "Database Design", "Full Stack Architecture"]
-    },
-    {
-      title: "Junior Front-end Developer",
-      company: "Sang Media - Morbi (Gujarat)",
-      period: "September 2024 - April 2025",
-      type: "JUNIOR FRONT END DEVELOPER",
-      description:
-        "As a Frontend Developer, I developed and optimized dynamic, scalable web applications using React.js and Next.js, focusing on performance and user experience. I implemented and integrated RESTful APIs to ensure smooth backend communication and leveraged Redux Toolkit and React Query (TanStack Query) for efficient state and data management. I crafted responsive, visually consistent UIs using Tailwind CSS and Bootstrap, adhering to modern design principles. Additionally, I collaborated with cross-functional teams and utilized Node.js for minor backend tasks, contributing to a more cohesive development workflow.",
-      skills: ["React", "Next.js", "Redux Toolkit", "React Query", "RESTful APIs", "Tailwind CSS", "Bootstrap", "Node.js", "Team Collaboration"]
-    },
-    {
-      title: "Intern Front-end Developer",
-      company: "Sang Media - Morbi (Gujarat)",
-      period: "July 2024 - September 2024",
-      type: "INTERN FRONT END DEVELOPER",
-      description:
-        "Built and maintained responsive, high-performance web applications using React.js during my internship as a Front-end Developer. Collaborated with backend teams to integrate RESTful APIs, ensuring smooth data flow and optimal user experiences. Utilized Redux Toolkit and React Query for efficient state management and data caching. Designed consistent, device-friendly UIs using Tailwind CSS and Bootstrap. Actively participated in code reviews and team stand-ups, contributing to agile development cycles. Focused on writing clean, reusable code and followed best practices to enhance code maintainability and scalability.",
-      skills: [
-        "Redux Toolkit",
-        "React Query",
-        "Tailwind CSS",
-        "Bootstrap",
-        "Code Reviews",
-        "Agile Development",
-        "Clean Code",
-        "Best Practices",
-      ],
-    },
-  ];
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (experienceRef.current) {
-      observer.observe(experienceRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
+export default function Experience() {
   return (
-    <section id="experience" className="py-20 px-6 relative">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Work Experience
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-8"></div>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Professional journey and key contributions in web development
-          </p>
-        </div>
+    <section id="experience" className="scroll-mt-24 px-5 py-24 sm:px-6">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeader
+          eyebrow="Experience"
+          title="Where the work happened."
+          description="Roles, dates, and responsibilities taken from my existing portfolio. Nothing here is inferred beyond that record."
+        />
 
-        <div ref={experienceRef} className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500 hidden md:block"></div>
-
-          {experiences.map((exp, index) => (
-            <div
-              key={index}
-              className="relative mb-12 md:ml-16 group"
-              style={{ animationDelay: `${index * 200}ms` }}
-            >
-              {/* Timeline dot */}
-              <div className="absolute -left-20 top-6 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-4 border-gray-900 hidden md:block group-hover:scale-125 transition-transform duration-300"></div>
-
-              <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/10">
-                <div className="flex flex-wrap items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{exp.title}</h3>
-                    <div className="flex items-center text-blue-400 mb-2">
-                      <Building size={16} className="mr-2" />
-                      <span className="font-medium">{exp.company}</span>
-                    </div>
-                    <div className="flex items-center text-gray-400 mb-2">
-                      <Calendar size={16} className="mr-2" />
-                      <span>{exp.period}</span>
-                    </div>
-                    <div className="inline-block bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30">
-                      {exp.type}
-                    </div>
-                  </div>
+        <ol className="mt-14 space-y-5">
+          {experiences.map((job, index) => (
+            <Reveal key={job.title + job.period} delay={index * 0.05}>
+              <li className="grid gap-6 rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:grid-cols-[220px_minmax(0,1fr)] md:p-8">
+                <div>
+                  <p className="text-sm text-violet-200">{job.period}</p>
+                  <p className="mt-3 font-medium text-white">{job.company}</p>
+                  <p className="text-sm text-zinc-500">{job.location}</p>
                 </div>
-
-                <p className="text-gray-300 leading-relaxed mb-6">{exp.description}</p>
-
-                <div className="flex flex-wrap gap-2">
-                  {exp.skills.map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm border border-blue-500/30 hover:bg-blue-500/30 transition-colors duration-300"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                <div>
+                  <h3 className="font-display text-2xl text-white">{job.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-zinc-300 sm:text-base">{job.summary}</p>
+                  <ul className="mt-4 space-y-2 text-sm leading-relaxed text-zinc-400">
+                    {job.points.map((point) => (
+                      <li key={point} className="flex gap-2">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-cyan-200" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <ul className="mt-5 flex flex-wrap gap-2">
+                    {job.skills.map((skill) => (
+                      <li key={skill} className="rounded-full border border-white/10 px-2.5 py-1 text-xs text-zinc-300">
+                        {skill}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
-            </div>
+              </li>
+            </Reveal>
           ))}
+        </ol>
+
+        <div className="mt-16">
+          <h3 className="font-display text-3xl text-white">How I approach the work</h3>
+          <div className="mt-6 grid gap-3 md:grid-cols-2">
+            {approach.map((item, index) => (
+              <Reveal key={item.title} delay={index * 0.04}>
+                <article className="h-full rounded-3xl border border-white/10 p-5">
+                  <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">0{index + 1}</p>
+                  <h4 className="mt-3 font-medium text-white">{item.title}</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-400">{item.text}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default Experience;
+}

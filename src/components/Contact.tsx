@@ -1,165 +1,185 @@
+import { useState, type ReactNode } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { profile } from "@/data/portfolio";
+import { mailtoHref, submitContact, type ContactPayload } from "@/lib/contact";
+import Reveal from "./Reveal";
 
-import React, { useState, useRef, useEffect } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+const schema = z.object({
+  name: z.string().trim().min(2, "Please enter your name."),
+  email: z.string().trim().email("Enter a valid email address."),
+  subject: z.string().trim().min(3, "Add a short subject."),
+  message: z.string().trim().min(20, "Share a little more about the project."),
+  website: z.string().optional(),
+});
 
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+type FormValues = z.infer<typeof schema>;
+
+export default function Contact() {
+  const [status, setStatus] = useState<"idle" | "sent" | "draft" | "error">("idle");
+  const [error, setError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: { name: "", email: "", subject: "", message: "", website: "" },
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const contactRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const onSubmit = async (values: FormValues) => {
+    setStatus("idle");
+    setError("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for your message. I'll get back to you soon!",
-      });
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setIsSubmitting(false);
-    }, 2000);
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (contactRef.current) {
-      observer.observe(contactRef.current);
+    if (values.website) {
+      setStatus("sent");
+      reset();
+      return;
     }
 
-    return () => observer.disconnect();
-  }, []);
+    const payload: ContactPayload = {
+      name: values.name,
+      email: values.email,
+      subject: values.subject,
+      message: values.message,
+    };
+    const result = await submitContact(payload);
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: "Email",
-      value: "patelbhargavi1624@email.com",
-      link: "mailto:patelbhargavi1624@email.com",
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      icon: Phone,
-      title: "Phone",
-      value: "+91 99787 76575",
-      link: "tel:+919978776575",
-      color: "from-green-500 to-emerald-500"
-    },
-    {
-      icon: MapPin,
-      title: "Location",
-      value: "Ahmedabad, Gujarat, India",
-      link: "#",
-      color: "from-purple-500 to-pink-500"
+    if (result.status === "error") {
+      setStatus("error");
+      setError(result.message);
+      return;
     }
-  ];
+
+    setStatus(result.status);
+    if (result.status === "sent") reset();
+  };
 
   return (
-    <section id="contact" className="py-20 px-6 bg-gray-900/50 relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute top-20 left-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
-
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Get In Touch
+    <section id="contact" className="scroll-mt-24 px-5 py-24 sm:px-6">
+      <div className="mx-auto max-w-6xl">
+        <Reveal>
+          <p className="text-xs font-medium uppercase tracking-[0.22em] text-violet-300/90">Contact</p>
+          <h2 className="mt-3 max-w-3xl font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Have a project in mind? Let’s build something great.
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-8"></div>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Ready to start your next project? Let's discuss how we can work together to bring your ideas to life.
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg">
+            Freelance work, product teams, and full-time conversations are all welcome. Tell me what you are building and I will reply by email.
           </p>
-        </div>
+        </Reveal>
 
-        <div ref={contactRef} className="">
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-3xl font-bold text-white mb-6">Let's Connect</h3>
-              <p className="text-gray-300 leading-relaxed mb-8">
-                I'm always interested in hearing about new opportunities and exciting projects.
-                Whether you have a question or just want to say hi, feel free to reach out!
-              </p>
+        <div className="mt-12 grid gap-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+          <Reveal className="space-y-3">
+            <ContactLink icon={Mail} label="Email" value={profile.email} href={`mailto:${profile.email}`} />
+            <ContactLink icon={Phone} label="Phone" value={profile.phone} href={profile.phoneHref} />
+            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+              <span className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-violet-200">
+                <MapPin size={16} />
+              </span>
+              <span>
+                <span className="block text-xs uppercase tracking-[0.14em] text-zinc-500">Location</span>
+                <span className="text-sm text-white">{profile.location}</span>
+              </span>
             </div>
+            <ContactLink icon={Github} label="GitHub" value="patel-bhargavi" href={profile.github} external />
+            <ContactLink icon={Linkedin} label="LinkedIn" value="Bhargavi Patel" href={profile.linkedin} external />
+            <a
+              href={mailtoHref({ subject: "Resume request", message: "Hello Bhargavi, please send your resume." })}
+              className="inline-flex pt-2 text-sm font-medium text-violet-200 underline-offset-4 hover:underline"
+            >
+              Request resume by email
+            </a>
+          </Reveal>
 
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <a
-                  key={index}
-                  href={info.link}
-                  className="flex items-center p-4 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-gray-900/50 group"
-                  style={{ animationDelay: `${index * 150}ms` }}
+          <Reveal delay={0.06}>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate className="relative rounded-[28px] border border-white/10 bg-white/[0.03] p-5 sm:p-7">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label="Name" error={errors.name?.message}>
+                  <input id="name" autoComplete="name" className={inputClass} {...register("name")} />
+                </Field>
+                <Field label="Email" error={errors.email?.message}>
+                  <input id="email" type="email" autoComplete="email" className={inputClass} {...register("email")} />
+                </Field>
+              </div>
+              <div className="mt-4">
+                <Field label="Subject" error={errors.subject?.message}>
+                  <input id="subject" className={inputClass} {...register("subject")} />
+                </Field>
+              </div>
+              <div className="mt-4">
+                <Field label="Project details" error={errors.message?.message}>
+                  <textarea id="message" rows={6} className={`${inputClass} resize-y`} {...register("message")} />
+                </Field>
+              </div>
+              <div hidden>
+                <label htmlFor="website">Company website</label>
+                <input id="website" tabIndex={-1} autoComplete="off" {...register("website")} />
+              </div>
+              <div className="mt-5 flex flex-wrap items-center gap-4">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="rounded-full bg-violet-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-violet-400 disabled:cursor-wait disabled:opacity-70"
                 >
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${info.color} flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <info.icon size={24} className="text-white" />
-                  </div>
-                  <div>
-                    <div className="text-gray-400 text-sm">{info.title}</div>
-                    <div className="text-white font-medium group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-500 group-hover:bg-clip-text transition-all duration-300">
-                      {info.value}
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
-
-            {/* Social Links */}
-            <div className="flex space-x-4 pt-6">
-              <a
-                href="https://github.com/patel-bhargavi"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/25 group"
-              >
-                <Github size={24} className="group-hover:text-blue-400 transition-colors duration-300" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/bhargavi-patel-1016b9238/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/25 group"
-              >
-                <Linkedin size={24} className="group-hover:text-blue-400 transition-colors duration-300" />
-              </a>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Footer */}
-        <div className="text-center mt-16 pt-8 border-t border-gray-800">
-          <p className="text-gray-400">
-            © 2025 Bhargavi Patel. Built with React & Tailwind CSS
-          </p>
+                  {isSubmitting ? "Sending…" : "Send message"}
+                </button>
+                <p className="text-sm text-zinc-500" role="status" aria-live="polite">
+                  {status === "sent" ? "Message sent. I will reply by email." : null}
+                  {status === "draft" ? "Your email app should open with this message ready to send." : null}
+                  {status === "error" ? error : null}
+                </p>
+              </div>
+            </form>
+          </Reveal>
         </div>
       </div>
     </section>
   );
-};
+}
 
-export default Contact;
+const inputClass =
+  "mt-2 w-full rounded-2xl border border-white/10 bg-zinc-950/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-violet-300/60";
+
+function Field({ label, error, children }: { label: string; error?: string; children: ReactNode }) {
+  return (
+    <label className="block text-sm text-zinc-300">
+      {label}
+      {children}
+      {error ? <span className="mt-1 block text-xs text-rose-300">{error}</span> : null}
+    </label>
+  );
+}
+
+function ContactLink({
+  icon: Icon,
+  label,
+  value,
+  href,
+  external,
+}: {
+  icon: typeof Mail;
+  label: string;
+  value: string;
+  href: string;
+  external?: boolean;
+}) {
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+      className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 transition hover:border-white/20"
+    >
+      <span className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-violet-200">
+        <Icon size={16} />
+      </span>
+      <span>
+        <span className="block text-xs uppercase tracking-[0.14em] text-zinc-500">{label}</span>
+        <span className="text-sm text-white">{value}</span>
+      </span>
+    </a>
+  );
+}

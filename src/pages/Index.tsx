@@ -1,43 +1,31 @@
-
-import React from 'react';
-import Hero from '../components/Hero';
-import About from '../components/About';
-import Skills from '../components/Skills';
-import Experience from '../components/Experience';
-import Projects from '../components/Projects';
-import Education from '../components/Education';
-import Contact from '../components/Contact';
-import Navigation from '../components/Navigation';
-import { useEffect } from 'react';
+import About from "@/components/About";
+import Architecture from "@/components/Architecture";
+import Contact from "@/components/Contact";
+import Education from "@/components/Education";
+import Experience from "@/components/Experience";
+import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
+import Navigation from "@/components/Navigation";
+import Projects from "@/components/Projects";
+import Skills from "@/components/Skills";
+import HeroScene from "@/components/hero/HeroScene";
 
 const Index = () => {
-  useEffect(() => {
-    // Smooth scrolling for anchor links
-    const handleScroll = (e: Event) => {
-      const target = e.target as HTMLAnchorElement;
-      if (target.hash) {
-        e.preventDefault();
-        const element = document.querySelector(target.hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    };
-
-    document.addEventListener('click', handleScroll);
-    return () => document.removeEventListener('click', handleScroll);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#09090b] text-zinc-100">
       <Navigation />
-      <Hero />
-      <About />
-      <Skills />
-      <Experience />
-      <Projects />
-      <Education />
-      <Contact />
+      <HeroScene />
+      <main id="main" className="relative z-10">
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Architecture />
+        <Education />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 };
